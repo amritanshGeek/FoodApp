@@ -1,11 +1,17 @@
 import { AnyAction, combineReducers } from '@reduxjs/toolkit';
 
+import {
+  accessToken,
+} from '../Features';
+
 import { enableMapSet } from 'immer';
 
 enableMapSet();
 
 // Root Reducer
-const combinedReducer = combineReducers({});
+const combinedReducer = combineReducers({
+  accessToken,
+});
 
 /**
  * Root Reducer State

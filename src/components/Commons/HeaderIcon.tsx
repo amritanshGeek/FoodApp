@@ -8,7 +8,7 @@ import {
   reSize,
   Sizes,
   useHeaderHeight,
-} from '@utils';
+} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import Animated, {

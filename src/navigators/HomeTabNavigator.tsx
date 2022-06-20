@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react';
 import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { Account, Food, Instamart, Search, Swiggy } from '../screens';
-import { NavigationService } from '../utils';
+import { NavigationService, reSize } from '../utils';
 import { DrawerActions } from '@react-navigation/routers';
 import {Colors} from '../utils';
-// HomeTab
-const { Navigator, Screen } = createBottomTabNavigator();
 import { View, Text, TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+Ionicons.loadFont();
+const { Navigator, Screen } = createBottomTabNavigator();
 
 type TabBarProps = BottomTabBarProps & {};
 
@@ -72,7 +73,10 @@ const HomeTabNavigator: FC = () => {
       <Screen
         name="Swiggy"
         options={{
-          // headerShown: false,
+          headerShown: false,
+          tabBarIcon: () => (
+            <Ionicons name="logo-foursquare" color="orange" size={reSize(20)} />
+          )
         }}
         component={Swiggy}
       />

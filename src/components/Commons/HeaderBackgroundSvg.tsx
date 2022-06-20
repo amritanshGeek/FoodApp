@@ -1,4 +1,4 @@
-import { widthPercentageToDP } from '@slick-ui/core';
+// import { widthPercentageToDP } from '@slick-ui/core';
 import { reSize, Sizes, useHeaderHeight } from '../../utils';
 import React, { FC, useContext } from 'react';
 import { StyleSheet, useWindowDimensions, View } from 'react-native';
@@ -66,7 +66,7 @@ const HeaderBackgroundSvg: FC<SvgProps> = props => {
         </Mask>
         <G mask="url(#prefix__a)" fillRule="evenodd" clipRule="evenodd">
           <Path
-            d={`M${widthPercentageToDP('2%')} ${headerHeight + offset} Q${
+            d={`M${0} ${headerHeight + offset} Q${
               width / 2.7 / 2
             } ${headerHeight / 2} ${width / 2.7} ${headerHeight}z`}
             fill="url(#prefix__paint1_linear)"

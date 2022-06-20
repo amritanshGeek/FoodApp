@@ -1,7 +1,7 @@
 import React, { FC, memo, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Icon, ReHighlight, useColors } from '@slick-ui/core';
-import { reSize, useHeaderHeight } from '@utils';
+import { reSize, useHeaderHeight } from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderIcon from './HeaderIcon';
 import {
@@ -32,7 +32,7 @@ const HeaderLeft: FC<HeaderLeftProps> = props => {
       {...{ onPress }}
       style={[styles.container, { height: header, width: header }]}>
       <Ionicons
-        name={isMenuIcon ? 'menu' : icon || 'arrow-back'}
+        name={isMenuIcon ? 'menu' : icon || 'back'}
         size={16}
         color={color}
       />

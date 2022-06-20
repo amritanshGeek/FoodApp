@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { reSize } from '@utils';
+import { reSize } from '../../utils';
 Ionicons.loadFont();
 
 /**
@@ -12,7 +12,7 @@ type HeaderTitleProps = {};
  * HeaderTitle
  */
 const HeaderTitle: FC<HeaderTitleProps> = () => {
-  return <Ionicons name="logo-white" color="#fff" size={reSize(20)} />;
+  return <Ionicons name="logo-foursquare" color="orange" size={reSize(50)} />;
 };
 
 export default memo(HeaderTitle);

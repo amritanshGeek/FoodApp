@@ -7,3 +7,5 @@ export { default as Search } from './Search';
 export { default as Food } from './Food';
 export { default as Instamart } from './Instamart';
 export { default as Account } from './Account';
+export { default as SignIn } from './SignIn';
+export { default as SignUp } from './SignUp';
