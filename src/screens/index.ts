@@ -1,0 +1,9 @@
+export { default as Home } from './Home';
+export { default as Drawer } from './Drawer';
+export { default as Cart } from './Cart';
+export { default as Test } from './Test';
+export { default as Swiggy } from './Swiggy';
+export { default as Search } from './Search';
+export { default as Food } from './Food';
+export { default as Instamart } from './Instamart';
+export { default as Account } from './Account';
