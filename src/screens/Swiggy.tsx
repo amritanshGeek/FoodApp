@@ -2,6 +2,7 @@ import { ParentContainer } from '../components';
 import { View, Text } from 'native-base';
 import React, { FC, memo } from 'react';
 import { StyleSheet } from 'react-native';
+import { Sizes } from '../utils';
 
 /**
  * Swiggy
@@ -24,6 +25,8 @@ const Swiggy: FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingHorizontal: Sizes.LIST_PADDING_HORIZONTAL,
+    paddingTop: Sizes.HEADER_OFFSET,
   },
 })
 export default memo(Swiggy);

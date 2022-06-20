@@ -26,7 +26,7 @@ const HomeDrawerNavigator: FC = () => {
         overlayColor: '#00000040',
         headerShown: false,
       }}
-      // drawerContent={props => <Drawer {...props} />}
+      drawerContent={props => <Drawer {...props} />}
       >
       <Screen name="Home" component={HomeTabNavigator} />
     </Navigator>

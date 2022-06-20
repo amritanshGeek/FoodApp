@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { NavigationService } from '../utils';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import MainNavigator from './MainNavigator';
-import { StatusBar } from 'react-native';
+import { StatusBar, View } from 'react-native';
 // import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 
