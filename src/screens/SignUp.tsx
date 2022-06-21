@@ -1,14 +1,15 @@
-import { View, Text } from 'native-base';
+import { SignUpComponents } from '../components';
 import React, { FC, memo } from 'react';
+const { Container, List } = SignUpComponents;
 
 /**
  * SignUp
  */
 const SignUp: FC = () => {
   return (
-    <View>
-      <Text>SignUp page </Text>
-    </View>
+    <Container>
+      <List />
+    </Container>
   );
 };
 

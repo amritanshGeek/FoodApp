@@ -1,9 +1,15 @@
+import { ReducerState } from "./reducer";
+
 /**
  * User
  * My Profile/user details
  */
-export interface User {
+ export interface User {
   _id: string;
+  email: string;
+  name: string;
+  token: string;
+  password: string;
 }
 
 /**
@@ -22,6 +28,11 @@ export type ProfileTileUserDetails = {
 export type AccessToken = string;
 
 /**
+ * Complete Users Data type , as we are storing all user data in local
+ */
+export type UsersData = object;
+
+/**
  *
  *
  *=================================================================
@@ -32,3 +43,9 @@ export type AccessToken = string;
 export type AccessTokenState = {
   token?: AccessToken;
 };
+
+export type UsersDataState = {
+  data?: UsersData;
+};
+
+export type UserState = ReducerState<User>;

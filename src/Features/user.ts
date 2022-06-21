@@ -1,21 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { AccessTokenState } from '../types';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+import { UserState } from '../types';
 
-const initialState: AccessTokenState = {};
+const initialState: UserState & { isUpdating: boolean } = {
+  isLoading: false,
+  isUpdating: false,
+};
 
-const accessTokenSlice = createSlice({
-  name: 'user/token',
+const userSlice = createSlice({
   initialState,
+  name: 'user',
   reducers: {
-    setAccessToken: (state, action) => {
-      state.token = action.payload;
+    setUserDetails: (state, action) => {
+      state.data = action.payload;
     },
-    removeAccessToken: state => {
-      state.token = undefined;
+    removeUserDetails: state => {
+      state.data = undefined;
     },
   },
 });
 
-export const { setAccessToken, removeAccessToken } = accessTokenSlice.actions;
+export const { setUserDetails, removeUserDetails } = userSlice.actions;
 
-export default accessTokenSlice.reducer;
+export default userSlice.reducer;

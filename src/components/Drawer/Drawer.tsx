@@ -7,6 +7,8 @@ import { NavigationService, Colors, reSize } from '../../utils';
 import { DrawerActions } from '@react-navigation/native';
 import DrawerButton from './DrawerButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { dispatch } from '../../store';
+import { removeAccessToken, removeUserDetails, removeUsersDataDetails } from '../../Features';
 
 /**
  * DrawerProps
@@ -21,7 +23,29 @@ const Drawer: FC<DrawerProps> = () => {
   // const { t } = useTranslation();
 
   const onLogoutPressed = useCallback(() => {
-    Alert.alert('logout pressed');
+    // Alert.alert('logout pressed');
+    Alert.alert(  
+      'Are You Sure Want to Logout',
+      '',
+      [  
+        {  
+          text: 'Cancel',  
+          onPress: () => {},
+          style: 'cancel',  
+        },  
+        {
+          text: 'Yes', 
+          onPress: () => {
+            dispatch(removeAccessToken());
+            dispatch(removeUserDetails());
+            // dispatch(removeUsersDataDetails());
+            NavigationService.replace('Auth');
+            dispatch({ type: 'RESET' });
+            console.log('lgout now');
+          }
+        },  
+      ]
+    );
   }, []);
   return (
     <View style={[styles.container, { backgroundColor: Colors.LIGHT_BACKGROUND }]}>

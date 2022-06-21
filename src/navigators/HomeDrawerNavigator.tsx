@@ -4,9 +4,8 @@ import HomeTabNavigator from './HomeTabNavigator';
 import { StyleSheet, Platform } from 'react-native';
 import { Colors } from '../utils';
 import { Drawer } from '../components';
-// import { Drawer } from '@components';
+import { useSelector } from 'react-redux';
 
-// HomeDrawer
 const { Navigator, Screen } = createDrawerNavigator();
 const isIpad = Platform.OS === 'ios' ? Platform.isPad : false;
 
@@ -14,6 +13,15 @@ const isIpad = Platform.OS === 'ios' ? Platform.isPad : false;
  * HomeDrawerNavigator
  */
 const HomeDrawerNavigator: FC = () => {
+  const data = useSelector(state => state.userDetails.data);
+  const token = useSelector(state => state.accessToken.token);
+  const allData = useSelector(state => state.allUserDetails.data);
+
+  console.log('data',data);
+  console.log('allData',allData);
+  console.log('token',token);
+
+  console.log('')
   return (
     <Navigator
       screenOptions={{

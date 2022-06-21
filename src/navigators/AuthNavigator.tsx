@@ -4,16 +4,7 @@ import {
     ParentContainer,
   } from '../components';
   import { NavigationService } from '../utils';
-import { View } from 'react-native';
 import {
-    Home,
-    Cart,
-    Drawer,
-    Swiggy,
-    Food,
-    Instamart,
-    Search,
-    Account,
     SignIn,
     SignUp,
 } from '../screens';
@@ -37,12 +28,12 @@ const AuthNavigator: FC = () => {
           <AppStack.Screen
             name={NavigationService.ScreenNames.SignIn}
             component={SignIn}
-            options={{ title: 'Dashboard' }}
+            options={{ headerShown: false, }}
           />
           <AppStack.Screen
             name={NavigationService.ScreenNames.SignUp}
-            options={{ title: 'Food' }}
             component={SignUp}
+            options={{ headerShown: false, }}
           />
         </AppStack.Navigator>
     </ParentContainer>
