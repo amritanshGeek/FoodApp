@@ -32,8 +32,8 @@ const HeaderLeft: FC<HeaderLeftProps> = props => {
       {...{ onPress }}
       style={[styles.container, { height: header, width: header }]}>
       <Ionicons
-        name={isMenuIcon ? 'menu' : icon || 'back'}
-        size={16}
+        name={isMenuIcon ? 'menu' : icon || 'arrow-back'}
+        size={20}
         color={color}
       />
     </ReHighlight>

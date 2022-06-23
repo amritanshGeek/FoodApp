@@ -10,7 +10,7 @@ import {
     Home,
     Cart,
     Drawer,
-    Swiggy,
+    Dashboard,
     Food,
     Instamart,
     Search,
@@ -42,7 +42,7 @@ const AppNavigator: FC = () => {
           />
           <AppStack.Screen
             name={NavigationService.ScreenNames.Dashboard}
-            component={Swiggy}
+            component={Dashboard}
             options={{ title: 'Dashboard' }}
           />
           <AppStack.Screen

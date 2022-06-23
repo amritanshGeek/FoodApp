@@ -1,20 +1,24 @@
 import React, { FC, useEffect } from 'react';
 import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Account, Food, Instamart, Search, Swiggy } from '../screens';
+import { Account, Food, Instamart, Search, Dashboard } from '../screens';
 import { NavigationService, reSize } from '../utils';
 import { DrawerActions } from '@react-navigation/routers';
 import {Colors} from '../utils';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Text, View } from 'native-base';
 Ionicons.loadFont();
+MaterialCommunityIcons.loadFont();
 const { Navigator, Screen } = createBottomTabNavigator();
 
 type TabBarProps = BottomTabBarProps & {};
 
 const MyTabBar: FC<TabBarProps> =({ state, descriptors, navigation })=> {
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
       {state.routes.map((route, index) => {
+        console.log('route',route);
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
@@ -44,10 +48,11 @@ const MyTabBar: FC<TabBarProps> =({ state, descriptors, navigation })=> {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 , height:60}}
+            style={{ flex: 1 , height:60,alignItems:'center'}}
             key={index}
           >
-            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+            <MaterialCommunityIcons name={index==2?'store-search':route.name.toLocaleLowerCase()} color={'#000'} size={20} />
+            <Text bold={isFocused} style={{ color: isFocused ? '#673ab7' : '#222' }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -71,20 +76,37 @@ const HomeTabNavigator: FC = () => {
       }}
       tabBar={props => <MyTabBar {...props} />}>
       <Screen
-        name="Swiggy"
+        name="Home"
         options={{
           headerShown: false,
-          tabBarIcon: () => (
-            <Ionicons name="logo-foursquare" color="orange" size={reSize(20)} />
-          )
+          tabBarLabel: 'Home',
         }}
-        component={Swiggy}
+        component={Dashboard}
       />
-      {/* MaterialCommunityIcons */}
-      <Screen name="Food" component={Food} />
-      <Screen name="Instamart" component={Instamart} />
-      <Screen name="Search" component={Search} />
-      <Screen name="Account" component={Account} />
+      <Screen
+        name="Filter"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Filter',
+        }} 
+        component={Food}
+      />
+      <Screen
+        name="Search"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Search',
+        }}
+        component={Search}
+      />
+      <Screen
+        name="Account"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Profile',
+        }}
+        component={Account}
+      />
     </Navigator>
   );
 };

@@ -1,10 +1,10 @@
 import React, { FC, memo} from 'react';
 import { useScrollValue } from '../utils';
-import { SearchComponents } from '../components';
-const { Container, Header, List } = SearchComponents;
+import { DashboardComponents } from '../components';
+const { Container, Header, List } = DashboardComponents;
 
 /**
- * Search
+ * Dashboard
  */
 
 const Dashboard: FC = () => {

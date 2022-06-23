@@ -1,6 +1,7 @@
 import React, {
   FC,
   memo,
+  useState,
 } from 'react';
 import {
   View,
@@ -12,12 +13,17 @@ import {
   useColorModeValue,
   Input,
   Icon,
+  useToast,
 } from 'native-base';
 import { ParentContainer } from '../Commons';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { TouchableOpacity } from 'react-native';
 import { NavigationService } from '../../utils';
+import { useSelector } from 'react-redux';
+import { dispatch } from '../../store';
+import { setAccessToken, setUserDetails } from '../../Features';
 AntDesign.loadFont();
 
 export const Container: FC = ({ children }) => {
@@ -28,9 +34,46 @@ export const Container: FC = ({ children }) => {
 
 
 export const List: FC = memo(() => {
-    const {
-        toggleColorMode
-    } = useColorMode();
+    const [email,setEmail]=useState<string | undefined>();
+    const [pass,setPass]=useState<string | undefined>();
+    const [isVisible,setIsVisible]=useState<boolean | undefined>(false);
+    const toast = useToast();
+    const allData = useSelector(state => state.allUserDetails.data);
+       
+    const onSignIn=()=>{
+        if(!email?.trim()?.length){
+            toast.show({description: "Please Enter a email"})
+            return;
+        }
+        if(!pass?.trim()?.length){
+            toast.show({description: "Please Enter a password"})
+            return;
+        }
+        if(allData?.length){
+            allData.map((data)=>{
+                if(data.email.toLocaleLowerCase()===email.toLocaleLowerCase()){
+                    if(data.password===pass){
+                        dispatch(setAccessToken(data._id));
+                        dispatch(setUserDetails(data));
+                        NavigationService.replace('App');
+                        toast.show({description: "Logged In SuccessFully"})
+                    }else{
+                        toast.show({description: "Password does not match"})
+                    }
+                }else{
+                    toast.show({description: "User does not exist"})
+                }
+            })
+        }else{
+            toast.show({description: "There is no users"})
+        }
+        // let token = Date.now();
+        // dispatch(setAccessToken(token));
+        // dispatch(setUserDetails({name,email,password:pass,_id:token}));
+        // dispatch(setUsersDataDetails([{name,email,password:pass,_id:token}]));
+        // NavigationService.replace('App');
+    }
+
     return(
         <Center pt={20} flex={1} _dark={{
             bg: "coolGray.800"
@@ -48,28 +91,36 @@ export const List: FC = memo(() => {
                 <Text fontSize="14px">
                     {'Please sign in to continue'}
                 </Text>
-                <Box mt='20' borderRadius={'full'} bg={'white'} justifyContent={'flex-start'} shadow={'5'}>
+                <Box mt='20' bg={'white'} justifyContent={'flex-start'} >
                     <Input
-                        InputLeftElement={<Icon as={AntDesign} name="mail" color="coolGray.800" ml={2} />}
+                        InputLeftElement={<Icon as={AntDesign} name="mail" color="coolGray.800" ml={4} />}
                         placeholder="Email"
                         w="75%"
                         maxWidth="300px"
-                        variant="rounded"
+                        variant='outline'
                         height={'12'}
+                        onChangeText={(text)=>setEmail(text)}
                     />
                 </Box>
-                <Box mt='10' borderRadius={'full'} bg={"white"} justifyContent={'flex-start'} shadow={'5'}>
+                <Box mt='10' bg={"white"} justifyContent={'flex-start'} >
                     <Input
-                        InputLeftElement={<Icon as={AntDesign} name="lock" color="coolGray.800" ml={2} />}
+                        InputLeftElement={<Icon as={AntDesign} name="lock" color="coolGray.800" ml={4} />}
                         placeholder="Password"
                         w="75%"
                         maxWidth="300px"
-                        variant="rounded"
+                        variant='outline'
                         height={'12'}
+                        type={isVisible?'text':'password'}
+                        onChangeText={(text)=>setPass(text)}
+                        InputRightElement={
+                            <TouchableOpacity activeOpacity={1} onPress={()=>setIsVisible(!isVisible)}>
+                                <Icon as={Ionicons} name={isVisible?"eye":"eye-off"} color="orange.400" mr={4} />
+                            </TouchableOpacity>
+                        }
                     />
                 </Box>
-                <Box minWidth="300px" mt='10' borderRadius={'full'} alignItems='flex-end' justifyContent={'flex-end'} shadow={'5'}>
-                    <Button bg={'orange.400'} borderRadius={'full'} onPress={toggleColorMode}>
+                <Box minWidth="300px" mt='10' borderRadius={'full'} alignItems='flex-end' justifyContent={'flex-end'} >
+                    <Button bg={'orange.400'} borderRadius={'full'} onPress={onSignIn}>
                         <View paddingY={1} flexDirection={'row'} alignItems={'center'}>
                             <Text bold _light={{color: 'white'}} paddingX={2} _dark={{color: "warmGray.50"}}>LOGIN</Text>
                             <Icon as={AntDesign} name="arrowright" color="coolGray.800" _light={{color: 'white'}} _dark={{color: "warmGray.50"}} />

@@ -22,19 +22,14 @@ export type MyResponse<T = any> = {
     userId?: string;
     token?: string;
     body?: object;
-    signal?: AbortSignal;
-    isApiKeyNotNeeded?: boolean;
   };
   
   export type PutData = PostData;
   export type GetData = {
     endPoint: string;
-    isGoogle?: boolean;
     userId?: string;
     token?: string;
     params?: any;
-    signal?: AbortSignal;
-    isApiKeyNotNeeded?: boolean;
   };
   
   export type ReducerState<T = any> = {

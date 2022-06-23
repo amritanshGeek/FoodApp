@@ -1,22 +1,21 @@
 import React, { FC, memo} from 'react';
 import { useScrollValue } from '../utils';
-import { SearchComponents } from '../components';
-const { Container, Header, List } = SearchComponents;
-
+import { FilterComponents } from '../components';
+const { Container, Header, List } = FilterComponents;
 /**
- * Search
+ * Filter
  */
 
-const Dashboard: FC = () => {
+const Filter: FC = () => {
   const { scrollClamp: scrollY } = useScrollValue();
 
 
   return (
     <Container>
       <Header {...{ scrollY }} />
-      <List />
+      {/* <List /> */}
     </Container>
   );
 };
 
-export default memo(Dashboard);
+export default memo(Filter);

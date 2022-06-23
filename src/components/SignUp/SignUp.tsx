@@ -63,7 +63,7 @@ export const List: FC = memo(() => {
         let token = Date.now();
         dispatch(setAccessToken(token));
         dispatch(setUserDetails({name,email,password:pass,_id:token}));
-        dispatch(setUsersDataDetails({name,email,password:pass,_id:token}));
+        dispatch(setUsersDataDetails([{name,email,password:pass,_id:token}]));
         NavigationService.replace('App');
     }
     
@@ -86,51 +86,51 @@ export const List: FC = memo(() => {
                     }}>
                         {'Create Account'}
                 </Text>
-                <Box mt='20' borderRadius={'full'} bg={'white'} justifyContent={'flex-start'} shadow={'5'}>
+                <Box mt='20' bg={'white'} justifyContent={'flex-start'} >
                     <Input
                         InputLeftElement={<Icon as={AntDesign} name="user" color="coolGray.800" ml={2} />}
                         placeholder="Full Name"
                         w="75%"
                         maxWidth="300px"
-                        variant="rounded"
+                        variant='outline'
                         height={'12'}
                         onChangeText={(text)=>setName(text)}
                     />
                 </Box>
-                <Box mt='10' borderRadius={'full'} bg={'white'} justifyContent={'flex-start'} shadow={'5'}>
+                <Box mt='10' bg={'white'} justifyContent={'flex-start'} >
                     <Input
                         InputLeftElement={<Icon as={AntDesign} name="mail" color="coolGray.800" ml={2} />}
                         placeholder="Email"
                         w="75%"
                         maxWidth="300px"
-                        variant="rounded"
+                        variant='outline'
                         height={'12'}
                         onChangeText={(text)=>setEmail(text)}
                     />
                 </Box>
-                <Box mt='10' borderRadius={'full'} bg={"white"} justifyContent={'flex-start'} shadow={'5'}>
+                <Box mt='10' bg={"white"} justifyContent={'flex-start'} >
                     <Input
                         InputLeftElement={<Icon as={AntDesign} name="lock" color="coolGray.800" ml={2} />}
                         placeholder="Password"
                         w="75%"
                         maxWidth="300px"
-                        variant="rounded"
+                        variant='outline'
                         height={'12'}
                         onChangeText={(text)=>setPass(text)}
                     />
                 </Box>
-                <Box mt='10' borderRadius={'full'} bg={"white"} justifyContent={'flex-start'} shadow={'5'}>
+                <Box mt='10' bg={"white"} justifyContent={'flex-start'} >
                     <Input
                         InputLeftElement={<Icon as={AntDesign} name="lock" color="coolGray.800" ml={2} />}
                         placeholder="Confirm Password"
                         w="75%"
                         maxWidth="300px"
-                        variant="rounded"
+                        variant='outline'
                         height={'12'}
                         onChangeText={(text)=>setCnfPass(text)}
                     />
                 </Box>
-                <Box minWidth="300px" mt='10' borderRadius={'full'} alignItems='flex-end' justifyContent={'flex-end'} shadow={'5'}>
+                <Box minWidth="300px" mt='10' borderRadius={'full'} alignItems='flex-end' justifyContent={'flex-end'} >
                     <Button bg={'orange.400'} borderRadius={'full'} onPress={onSignUp}>
                         <View paddingY={1} flexDirection={'row'} alignItems={'center'}>
                             <Text bold _light={{color: 'white'}} paddingX={2} _dark={{color: "warmGray.50"}}>SIGN UP</Text>

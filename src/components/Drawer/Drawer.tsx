@@ -40,7 +40,7 @@ const Drawer: FC<DrawerProps> = () => {
             dispatch(removeUserDetails());
             // dispatch(removeUsersDataDetails());
             NavigationService.replace('Auth');
-            dispatch({ type: 'RESET' });
+            // dispatch({ type: 'RESET' });
             console.log('lgout now');
           }
         },  
