@@ -15,3 +15,11 @@ export {
   setUsersDataDetails,
   removeUsersDataDetails,
 } from './data';
+
+export {
+  default as allCartData,
+  setCartData,
+  updateCartData,
+  removefromCart,
+  emptyCartData,
+} from './cartData';

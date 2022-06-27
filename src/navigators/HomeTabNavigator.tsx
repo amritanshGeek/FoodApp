@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Account, Cart, Instamart, Search, Dashboard } from '../screens';
+import { Account, Cart, Search, Dashboard } from '../screens';
 import { NavigationService, reSize } from '../utils';
 import { DrawerActions } from '@react-navigation/routers';
 import {Colors} from '../utils';

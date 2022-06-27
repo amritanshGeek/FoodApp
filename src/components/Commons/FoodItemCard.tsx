@@ -9,6 +9,7 @@ import { FoodItem } from "../../types";
  type FoodComponentProps = {
     item: FoodItem;
     index: number;
+    onAddPress : () => void;
   };
   
   /**
@@ -16,7 +17,7 @@ import { FoodItem } from "../../types";
    */
 
 
-const FoodItemCard: FC<FoodComponentProps> = ({item,index}) => {
+const FoodItemCard: FC<FoodComponentProps> = ({item,index,onAddPress}) => {
     return (
       <Box key={index} bg="white" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%">
             <HStack flex={1} justifyContent={'space-between'} >
@@ -35,9 +36,9 @@ const FoodItemCard: FC<FoodComponentProps> = ({item,index}) => {
                                 </Text>
                             </VStack>
                         </Box>
-                        <Pressable style={{borderRadius:20,minWidth:100}} bgColor={'muted.50'} alignItems={'center'} onPress={()=> item?.strYoutube?Linking.openURL(item.strYoutube):null} rounded="xs" alignSelf="flex-start" p="1" shadow={2}>
+                        <Pressable style={{borderRadius:20,minWidth:100}} bgColor={'muted.50'} alignItems={'center'} onPress={onAddPress} rounded="xs" alignSelf="flex-start" p="1" shadow={2}>
                             <Text textTransform="uppercase" fontSize="sm" color="black">
-                                Add
+                                {item?.cartCount?item.cartCount:'Add'}
                             </Text>
                         </Pressable>
                     </HStack>

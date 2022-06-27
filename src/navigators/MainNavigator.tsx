@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 import { useSelector } from 'react-redux';
-// import { Test } from '@screens';
 
 const MainStack = createStackNavigator();
 
@@ -33,8 +32,6 @@ const MainNavigator = () => {
     return (
         <MainStack.Navigator
           initialRouteName={user ? 'App' : 'Auth'}
-          // initialRouteName={'App'}
-          // initialRouteName="Test"
           screenOptions={{
               headerShown: false,
           }}>

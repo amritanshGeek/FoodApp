@@ -110,7 +110,13 @@ export type FoodItem = {
   strSource: string;
   strTags: string;
   strYoutube: string;
+  cartCount: number;
 };
+
+export type cartDataType = {
+  data?: FoodItem[];
+};
+
 
 export type categoryItem = {
   strCategory: string,

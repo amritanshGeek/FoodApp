@@ -8,8 +8,6 @@ const userSlice = createSlice({
   name: 'data',
   reducers: {
     setUsersDataDetails: (state, action) => {
-      // console.log('state',state?.data);
-      // console.log('action',action);
       if(state.data?.length){
         state.data = [...state.data,action.payload[0]];
       }else{

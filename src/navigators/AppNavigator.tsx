@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   ParentContainer,
@@ -9,7 +9,6 @@ import AppDrawer from './HomeDrawerNavigator';
 import {
     Dashboard,
     Cart,
-    Instamart,
     Search,
     Account,
 } from '../screens';

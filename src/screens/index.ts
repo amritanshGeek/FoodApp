@@ -1,10 +1,6 @@
-export { default as Home } from './Home';
-export { default as Drawer } from './Drawer';
 export { default as Cart } from './Cart';
-export { default as Test } from './Test';
 export { default as Dashboard } from './Dashboard';
 export { default as Search } from './Search';
-export { default as Instamart } from './Instamart';
 export { default as Account } from './Account';
 export { default as SignIn } from './SignIn';
 export { default as SignUp } from './SignUp';

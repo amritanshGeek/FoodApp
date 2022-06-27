@@ -9,11 +9,10 @@ const { Container, Header, List } = CartComponents;
 const Cart: FC = () => {
   const { scrollClamp: scrollY } = useScrollValue();
 
-
   return (
     <Container>
       <Header {...{ scrollY }} />
-      {/* <List /> */}
+      <List />
     </Container>
   );
 };

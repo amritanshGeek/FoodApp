@@ -20,14 +20,13 @@ import { Colors, useHeaderHeight, useScrollValue } from '../../utils';
 // import { DrawerActions } from '@react-navigation/routers';
 import Animated, {
     Extrapolate,
-    // Extrapolation,
     interpolate,
-    // interpolateNode,
     useAnimatedStyle,
-    // useSharedValue,
    } from 'react-native-reanimated';
 import { ActivityIndicator, StyleProp, TouchableOpacity, ViewStyle } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { dispatch } from './../../store/store';
+import { setCartData } from '../../Features';
 MaterialCommunityIcons.loadFont();
 
 /**
@@ -226,7 +225,13 @@ export const List: FC = memo(() => {
                 keyboardShouldPersistTaps='always'
                 keyboardDismissMode='on-drag'
                 renderItem={({ item, index }) => (
-                    <FoodItemCard item={item} index={index}  />
+                  <FoodItemCard
+                    onAddPress={()=> {
+                      dispatch(setCartData(item))
+                    }}
+                    item={item}
+                    index={index}
+                  />
                 )}
                 keyExtractor={(item, index) => index.toString()}
                 onEndReachedThreshold={0.5}
@@ -240,11 +245,6 @@ export const List: FC = memo(() => {
                       </View>
                   )
                 }}
-                //   onEndReached={() => this._onEndReached()}
-                //   onRefresh={() => this._reload()}
-                //   refreshing={this.state.isReloading}
-                //   onViewableItemsChanged={this._onViewableItemsChanged}
-                //   viewabilityConfig={VIEWABILITY_CONFIG}
             />
             <Modal 
               isOpen={modalVisible} 
