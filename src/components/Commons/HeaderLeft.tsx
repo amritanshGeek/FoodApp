@@ -1,6 +1,5 @@
 import React, { FC, memo, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Icon, ReHighlight, useColors } from '@slick-ui/core';
 import { reSize, useHeaderHeight } from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import HeaderIcon from './HeaderIcon';
@@ -9,6 +8,7 @@ import {
   useNavigationState,
   useRoute,
 } from '@react-navigation/native';
+import { Pressable } from 'native-base';
 Ionicons.loadFont();
 
 /**
@@ -28,15 +28,15 @@ const HeaderLeft: FC<HeaderLeftProps> = props => {
   const { isMenuIcon, icon, onPress, color = '#fff' } = props;
   const { header } = useHeaderHeight();
   return (
-    <ReHighlight
+    <Pressable
       {...{ onPress }}
       style={[styles.container, { height: header, width: header }]}>
       <Ionicons
-        name={isMenuIcon ? 'menu' : icon || 'arrow-back'}
+        name={isMenuIcon ? 'location' : icon || 'arrow-back'}
         size={20}
         color={color}
       />
-    </ReHighlight>
+    </Pressable>
   );
 };
 

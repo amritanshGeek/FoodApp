@@ -191,12 +191,11 @@ const getCombinedUrl = (
           method: 'GET',
         };
 
-        console.log('init:', init);
+        // console.log('init:', init);
 
         const response = await fetch(url, init);
-        console.log('response:', response);
         const responseJson = await response.json();
-        console.log('responseJson:', responseJson);
+        console.log(`[response][${endPoint}]==>`, responseJson);
         if (response.ok) {
           resolve({
             status: true,

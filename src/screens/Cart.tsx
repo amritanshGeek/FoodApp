@@ -1,14 +1,20 @@
-import { View, Text } from 'native-base';
-import React, { FC, memo } from 'react';
-
+import React, { FC, memo} from 'react';
+import { useScrollValue } from '../utils';
+import { CartComponents } from '../components';
+const { Container, Header, List } = CartComponents;
 /**
  * Cart
  */
+
 const Cart: FC = () => {
+  const { scrollClamp: scrollY } = useScrollValue();
+
+
   return (
-    <View>
-      <Text>Cart page </Text>
-    </View>
+    <Container>
+      <Header {...{ scrollY }} />
+      {/* <List /> */}
+    </Container>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Account, Food, Instamart, Search, Dashboard } from '../screens';
+import { Account, Cart, Instamart, Search, Dashboard } from '../screens';
 import { NavigationService, reSize } from '../utils';
 import { DrawerActions } from '@react-navigation/routers';
 import {Colors} from '../utils';
@@ -18,7 +18,6 @@ const MyTabBar: FC<TabBarProps> =({ state, descriptors, navigation })=> {
   return (
     <View style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
       {state.routes.map((route, index) => {
-        console.log('route',route);
         const { options } = descriptors[route.key];
         const label =
           options.tabBarLabel !== undefined
@@ -51,7 +50,7 @@ const MyTabBar: FC<TabBarProps> =({ state, descriptors, navigation })=> {
             style={{ flex: 1 , height:60,alignItems:'center'}}
             key={index}
           >
-            <MaterialCommunityIcons name={index==2?'store-search':route.name.toLocaleLowerCase()} color={'#000'} size={20} />
+            <MaterialCommunityIcons name={index==1?'store-search':route.name.toLocaleLowerCase()} color={'#000'} size={20} />
             <Text bold={isFocused} style={{ color: isFocused ? '#673ab7' : '#222' }}>
               {label}
             </Text>
@@ -84,20 +83,20 @@ const HomeTabNavigator: FC = () => {
         component={Dashboard}
       />
       <Screen
-        name="Filter"
-        options={{
-          headerShown: false,
-          tabBarLabel: 'Filter',
-        }} 
-        component={Food}
-      />
-      <Screen
         name="Search"
         options={{
           headerShown: false,
           tabBarLabel: 'Search',
         }}
         component={Search}
+      />
+      <Screen
+        name="Cart"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Cart',
+        }} 
+        component={Cart}
       />
       <Screen
         name="Account"

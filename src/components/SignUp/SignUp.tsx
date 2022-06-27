@@ -1,6 +1,7 @@
 import React, {
     FC,
     memo,
+    useContext,
     useState,
 } from 'react';
 import {
@@ -22,6 +23,7 @@ import { TouchableOpacity } from 'react-native';
 import { NavigationService } from '../../utils';
 import { setUserDetails, setUsersDataDetails, setAccessToken } from '../../Features';
 import { dispatch } from './../../store/store';
+import { AuthContext } from '../../navigators/AuthProvider';
 
 AntDesign.loadFont();
   
@@ -38,12 +40,14 @@ export const List: FC = memo(() => {
     const [pass,setPass]=useState<string | undefined>();
     const [cnfPass,setCnfPass]=useState<string | undefined>();
     const toast = useToast();
+
+    const {register}= useContext(AuthContext);
     
     const onSignUp=()=>{
-        if(!name?.trim()?.length){
-            toast.show({description: "Please Enter a name"})
-            return;
-        }
+        // if(!name?.trim()?.length){
+        //     toast.show({description: "Please Enter a name"})
+        //     return;
+        // }
         if(!email?.trim()?.length){
             toast.show({description: "Please Enter a email"})
             return;
@@ -60,14 +64,15 @@ export const List: FC = memo(() => {
             toast.show({description: "password and confirm password should be same"})
             return;
         }
-        let token = Date.now();
-        dispatch(setAccessToken(token));
-        dispatch(setUserDetails({name,email,password:pass,_id:token}));
-        dispatch(setUsersDataDetails([{name,email,password:pass,_id:token}]));
-        NavigationService.replace('App');
+        register(email,pass);
+        // let token = Date.now();
+        // dispatch(setAccessToken(token));
+        // dispatch(setUserDetails({name,email,password:pass,_id:token}));
+        // dispatch(setUsersDataDetails([{name,email,password:pass,_id:token}]));
+        // NavigationService.replace('App');
     }
     
-      return(
+    return(
         <Center pt={20} flex={1} _dark={{
             bg: "coolGray.800"
         }} _light={{
@@ -86,7 +91,7 @@ export const List: FC = memo(() => {
                     }}>
                         {'Create Account'}
                 </Text>
-                <Box mt='20' bg={'white'} justifyContent={'flex-start'} >
+                {/* <Box mt='20' bg={'white'} justifyContent={'flex-start'} >
                     <Input
                         InputLeftElement={<Icon as={AntDesign} name="user" color="coolGray.800" ml={2} />}
                         placeholder="Full Name"
@@ -96,7 +101,7 @@ export const List: FC = memo(() => {
                         height={'12'}
                         onChangeText={(text)=>setName(text)}
                     />
-                </Box>
+                </Box> */}
                 <Box mt='10' bg={'white'} justifyContent={'flex-start'} >
                     <Input
                         InputLeftElement={<Icon as={AntDesign} name="mail" color="coolGray.800" ml={2} />}
@@ -146,6 +151,6 @@ export const List: FC = memo(() => {
                 </TouchableOpacity>
             </Box>
         </Center>
-      )
+    )
   });
     

@@ -16,7 +16,7 @@ import {
   Image,
   FlatList,
 } from 'native-base';
-import {HeaderLeft, HeaderTitle, ParentContainer, SearchBar} from '../Commons';
+import {HeaderLeft, HeaderTitle, ParentContainer, SearchBar, FoodItemCard} from '../Commons';
 import styles from './styles';
 import { FoodItem, GetData } from '../../types';
 import { Api } from '../../Features/config';
@@ -101,45 +101,6 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
     }
 )
 
-/**
- * FoodComponentProps
- */
- type FoodComponentProps = {
-    item: FoodItem;
-    index: number;
-  };
-  
-  /**
-   * FoodComponent
-   */
-
-const FoodComponent: FC<FoodComponentProps> = memo(({item,index}) => {
-    return (
-        <Box bg="primary.600" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%">
-            <HStack justifyContent="space-between">
-                <Box justifyContent="space-between">
-                    <VStack space="2">
-                    <Text fontSize="sm" color="white">
-                        {item.strArea || 'Area Name'}
-                    </Text>
-                    <Text color="white" fontSize="xl">
-                        {item.strMeal || 'Meal Name'}
-                    </Text>
-                    </VStack>
-                    <Pressable onPress={()=> item?.strYoutube?Linking.openURL(item.strYoutube):null} rounded="xs" bg="primary.400" alignSelf="flex-start" py="1" px="3">
-                        <Text textTransform="uppercase" fontSize="sm" color="white">
-                            Reference
-                        </Text>
-                    </Pressable>
-                </Box>
-                <Image source={{
-                uri: item?.strMealThumb?item.strMealThumb:'https://media.vanityfair.com/photos/5ba12e6d42b9d16f4545aa19/3:2/w_1998,h_1332,c_limit/t-Avatar-The-Last-Airbender-Live-Action.jpg'
-                }} alt="Aang flying and surrounded by clouds" height="100" rounded="full" width="100" />
-            </HStack>
-        </Box>
-    )
-})
-
 export const List: FC = memo(() => {
     const [loader,setLoader]=useState<boolean | undefined>(true);
     const [mealData,setMealData]=useState<FoodItem[] | undefined>([]);
@@ -155,17 +116,17 @@ export const List: FC = memo(() => {
             endPoint: Api.EndPoint.SEARCH,
             params: {s:searchText}
         };
-        console.log('getData:', getData);
+        // console.log('getData:', getData);
         const response = await Api.get(getData);
         const res =  (response.data as any).meals as FoodItem[];
-        console.log('response on dashboard',response);
+        // console.log('response on dashboard',response);
         if(res.length){
             setMealData(res);
         }
         setLoader(false);
     }
 
-    console.log('mealData',mealData);
+    // console.log('mealData',mealData);
 
     return (
         <View flex={1} justifyContent={'center'} alignItems={'center'}>
@@ -188,7 +149,7 @@ export const List: FC = memo(() => {
                 keyboardShouldPersistTaps='always'
                 keyboardDismissMode='on-drag'
                 renderItem={({ item, index }) => (
-                    <FoodComponent item={item} index={index}  />
+                    <FoodItemCard item={item} index={index}  />
                 )}
                 keyExtractor={(item, index) => index.toString()}
                 onEndReachedThreshold={0.5}

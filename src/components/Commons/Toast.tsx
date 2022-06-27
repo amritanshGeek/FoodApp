@@ -110,7 +110,7 @@ import React, {
             restDisplacementThreshold: 0.001,
           },
           finished => {
-            console.log('finished:', finished);
+            // console.log('finished:', finished);
             if (finished) {
               value.value = withDelay(
                 duration || DURATION,

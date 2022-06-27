@@ -7,11 +7,8 @@ import { NavigationService } from '../utils';
 import { View } from 'react-native';
 import AppDrawer from './HomeDrawerNavigator';
 import {
-    Home,
-    Cart,
-    Drawer,
     Dashboard,
-    Food,
+    Cart,
     Instamart,
     Search,
     Account,
@@ -46,14 +43,9 @@ const AppNavigator: FC = () => {
             options={{ title: 'Dashboard' }}
           />
           <AppStack.Screen
-            name={NavigationService.ScreenNames.Food}
-            options={{ title: 'Food' }}
-            component={Food}
-          />
-          <AppStack.Screen
-            name={NavigationService.ScreenNames.Instamart}
-            component={Instamart}
-            options={{ title: 'Instamart' }}
+            name={NavigationService.ScreenNames.Cart}
+            options={{ title: 'Cart' }}
+            component={Cart}
           />
           <AppStack.Screen
             name={NavigationService.ScreenNames.Search}

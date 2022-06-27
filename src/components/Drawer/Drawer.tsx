@@ -1,4 +1,4 @@
-import React, { FC, memo, useCallback } from 'react';
+import React, { FC, memo, useCallback, useContext } from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -9,6 +9,7 @@ import DrawerButton from './DrawerButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { dispatch } from '../../store';
 import { removeAccessToken, removeUserDetails, removeUsersDataDetails } from '../../Features';
+import { AuthContext } from '../../navigators/AuthProvider';
 
 /**
  * DrawerProps
@@ -21,6 +22,7 @@ type DrawerProps = DrawerContentComponentProps & {};
 const Drawer: FC<DrawerProps> = () => {
   const { top, bottom } = useSafeAreaInsets();
   // const { t } = useTranslation();
+    const {logout}= useContext(AuthContext);
 
   const onLogoutPressed = useCallback(() => {
     // Alert.alert('logout pressed');
@@ -36,12 +38,13 @@ const Drawer: FC<DrawerProps> = () => {
         {
           text: 'Yes', 
           onPress: () => {
-            dispatch(removeAccessToken());
-            dispatch(removeUserDetails());
-            // dispatch(removeUsersDataDetails());
-            NavigationService.replace('Auth');
-            // dispatch({ type: 'RESET' });
-            console.log('lgout now');
+            logout();
+            // dispatch(removeAccessToken());
+            // dispatch(removeUserDetails());
+            // // dispatch(removeUsersDataDetails());
+            // NavigationService.replace('Auth');
+            // // dispatch({ type: 'RESET' });
+            // console.log('lgout now');
           }
         },  
       ]

@@ -1,6 +1,7 @@
 import React, {
   FC,
   memo,
+  useContext,
   useState,
 } from 'react';
 import {
@@ -24,6 +25,7 @@ import { NavigationService } from '../../utils';
 import { useSelector } from 'react-redux';
 import { dispatch } from '../../store';
 import { setAccessToken, setUserDetails } from '../../Features';
+import { AuthContext } from '../../navigators/AuthProvider';
 AntDesign.loadFont();
 
 export const Container: FC = ({ children }) => {
@@ -39,6 +41,7 @@ export const List: FC = memo(() => {
     const [isVisible,setIsVisible]=useState<boolean | undefined>(false);
     const toast = useToast();
     const allData = useSelector(state => state.allUserDetails.data);
+    const {login}= useContext(AuthContext);
        
     const onSignIn=()=>{
         if(!email?.trim()?.length){
@@ -49,24 +52,25 @@ export const List: FC = memo(() => {
             toast.show({description: "Please Enter a password"})
             return;
         }
-        if(allData?.length){
-            allData.map((data)=>{
-                if(data.email.toLocaleLowerCase()===email.toLocaleLowerCase()){
-                    if(data.password===pass){
-                        dispatch(setAccessToken(data._id));
-                        dispatch(setUserDetails(data));
-                        NavigationService.replace('App');
-                        toast.show({description: "Logged In SuccessFully"})
-                    }else{
-                        toast.show({description: "Password does not match"})
-                    }
-                }else{
-                    toast.show({description: "User does not exist"})
-                }
-            })
-        }else{
-            toast.show({description: "There is no users"})
-        }
+        login(email,pass);
+        // if(allData?.length){
+        //     allData.map((data)=>{
+        //         if(data.email.toLocaleLowerCase()===email.toLocaleLowerCase()){
+        //             if(data.password===pass){
+        //                 dispatch(setAccessToken(data._id));
+        //                 dispatch(setUserDetails(data));
+        //                 NavigationService.replace('App');
+        //                 toast.show({description: "Logged In SuccessFully"})
+        //             }else{
+        //                 toast.show({description: "Password does not match"})
+        //             }
+        //         }else{
+        //             toast.show({description: "User does not exist"})
+        //         }
+        //     })
+        // }else{
+        //     toast.show({description: "There is no users"})
+        // }
         // let token = Date.now();
         // dispatch(setAccessToken(token));
         // dispatch(setUserDetails({name,email,password:pass,_id:token}));

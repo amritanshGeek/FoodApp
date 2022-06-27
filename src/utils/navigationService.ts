@@ -72,12 +72,9 @@ export const ScreenNames = {
   AppDrawer: 'AppDrawer',
   Home: 'Home',
   Cart: 'Cart',
-  Varieties: 'Varieties',
   SignIn: 'SignIn',
   SignUp: 'SignUp',
   Dashboard: 'Dashboard',
   Search: 'Search',
-  Food: 'Food',
-  Instamart: 'Instamart',
   Account: 'Account',
 };

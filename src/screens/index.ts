@@ -4,7 +4,6 @@ export { default as Cart } from './Cart';
 export { default as Test } from './Test';
 export { default as Dashboard } from './Dashboard';
 export { default as Search } from './Search';
-export { default as Food } from './Filter';
 export { default as Instamart } from './Instamart';
 export { default as Account } from './Account';
 export { default as SignIn } from './SignIn';

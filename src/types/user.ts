@@ -111,3 +111,15 @@ export type FoodItem = {
   strTags: string;
   strYoutube: string;
 };
+
+export type categoryItem = {
+  strCategory: string,
+}
+
+export type areaItem = {
+  strArea: string,
+}
+
+export type ingredientsItem = {
+  strIngredient: string,
+}

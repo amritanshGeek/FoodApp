@@ -17,11 +17,6 @@ const HomeDrawerNavigator: FC = () => {
   const token = useSelector(state => state.accessToken.token);
   const allData = useSelector(state => state.allUserDetails.data);
 
-  console.log('data',data);
-  console.log('allData',allData);
-  console.log('token',token);
-
-  console.log('')
   return (
     <Navigator
       screenOptions={{
@@ -36,7 +31,7 @@ const HomeDrawerNavigator: FC = () => {
       }}
       drawerContent={props => <Drawer {...props} />}
       >
-      <Screen name="Home" component={HomeTabNavigator} />
+      <Screen name="MainScreen" component={HomeTabNavigator} />
     </Navigator>
   );
 };

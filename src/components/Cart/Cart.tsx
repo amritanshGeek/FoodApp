@@ -40,9 +40,6 @@ export const Container: FC = ({children}) => {
         <ParentContainer style={[styles.container]}>{children}</ParentContainer>
     );
 };
-
-
-
   
 export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
     ({ scrollY }) => {
@@ -94,7 +91,7 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
               justifyContent: 'center',
               paddingRight: header,
             }}>
-            <Text fontSize={20} bold>Filter</Text>
+            <Text fontSize={20} bold>Cart</Text>
           </View>
         </Animated.View>
       )
@@ -155,17 +152,17 @@ export const List: FC = memo(() => {
             endPoint: Api.EndPoint.SEARCH,
             params: {s:searchText}
         };
-        console.log('getData:', getData);
+        // console.log('getData:', getData);
         const response = await Api.get(getData);
         const res =  (response.data as any).meals as FoodItem[];
-        console.log('response on dashboard',response);
+        // console.log('response on dashboard',response);
         if(res.length){
             setMealData(res);
         }
         setLoader(false);
     }
 
-    console.log('mealData',mealData);
+    // console.log('mealData',mealData);
 
     return (
         <View flex={1} justifyContent={'center'} alignItems={'center'}>
@@ -197,7 +194,7 @@ export const List: FC = memo(() => {
                         <View style={{alignItems: 'center', justifyContent: 'center'}}>
                             <Text
                                 style={{paddingVertical: 20, color: '#000', fontSize: 15}}>
-                                    No Filter Applied
+                                    No Food added yet
                             </Text>
                         </View>
                     )
