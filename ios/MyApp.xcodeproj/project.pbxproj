@@ -14,7 +14,7 @@
 		43D0737A6B5551CC3D060F7E /* Pods_MyApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 791B8D219CD19277992E9FCA /* Pods_MyApp.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C519DCDA7D8B4D8222655E8B /* Pods_MyApp_MyAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B9F33718E0D4FB9B9202E6A /* Pods_MyApp_MyAppTests.framework */; };
-		DE818F212869C3D200866A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE818F202869C3D200866A72 /* Assets.xcassets */; };
+		DE818F232869C54B00866A72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE818F222869C54B00866A72 /* Assets.xcassets */; };
 		DED7CC612866311900191CAD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DED7CC602866311900191CAD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 		791B8D219CD19277992E9FCA /* Pods_MyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = MyApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-MyApp-MyAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyApp-MyAppTests.release.xcconfig"; path = "Target Support Files/Pods-MyApp-MyAppTests/Pods-MyApp-MyAppTests.release.xcconfig"; sourceTree = "<group>"; };
-		DE818F202869C3D200866A72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/AppIcons/Assets.xcassets; sourceTree = "<group>"; };
+		DE818F222869C54B00866A72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../../Downloads/AppIcons (1)/Assets.xcassets"; sourceTree = "<group>"; };
 		DED7CC602866311900191CAD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -90,7 +90,6 @@
 		13B07FAE1A68108700A75B9A /* MyApp */ = {
 			isa = PBXGroup;
 			children = (
-				DE818F202869C3D200866A72 /* Assets.xcassets */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -121,6 +120,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				DE818F222869C54B00866A72 /* Assets.xcassets */,
 				DED7CC602866311900191CAD /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* MyApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -249,7 +249,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				DE818F212869C3D200866A72 /* Assets.xcassets in Resources */,
+				DE818F232869C54B00866A72 /* Assets.xcassets in Resources */,
 				DED7CC612866311900191CAD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
