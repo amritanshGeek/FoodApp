@@ -4,16 +4,9 @@ import {
     ParentContainer,
   } from '../components';
   import { NavigationService } from '../utils';
-import { View } from 'react-native';
 import {
-    Home,
-    Cart,
-    Drawer,
-    Swiggy,
-    Food,
-    Instamart,
-    Search,
-    Account,
+    SignIn,
+    SignUp,
 } from '../screens';
 
 const AppStack = createStackNavigator();
@@ -23,7 +16,7 @@ const AuthNavigator: FC = () => {
   return (
     <ParentContainer>
         <AppStack.Navigator
-          initialRouteName={NavigationService.ScreenNames.Dashboard}
+          initialRouteName={NavigationService.ScreenNames.SignIn}
           screenOptions={{
             headerMode: 'float',
             // headerBackgroundContainerStyle: {
@@ -33,32 +26,14 @@ const AuthNavigator: FC = () => {
             headerTintColor: '#fff',
           }}>
           <AppStack.Screen
-            name={NavigationService.ScreenNames.Dashboard}
-            component={Swiggy}
-            options={{ title: 'Dashboard' }}
+            name={NavigationService.ScreenNames.SignIn}
+            component={SignIn}
+            options={{ headerShown: false, }}
           />
           <AppStack.Screen
-            name={NavigationService.ScreenNames.Food}
-            options={{ title: 'Food' }}
-            component={Food}
-          />
-          <AppStack.Screen
-            name={NavigationService.ScreenNames.Instamart}
-            component={Instamart}
-            options={{ title: 'Instamart' }}
-          />
-          <AppStack.Screen
-            name={NavigationService.ScreenNames.Search}
-            component={Search}
-            options={{ title: 'Search' }}
-          />
-          <AppStack.Screen
-            name={NavigationService.ScreenNames.Account}
-            options={{
-              headerShown: false,
-              header: () => <View />,
-            }}
-            component={Account}
+            name={NavigationService.ScreenNames.SignUp}
+            component={SignUp}
+            options={{ headerShown: false, }}
           />
         </AppStack.Navigator>
     </ParentContainer>

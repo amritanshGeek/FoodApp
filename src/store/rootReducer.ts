@@ -1,11 +1,23 @@
 import { AnyAction, combineReducers } from '@reduxjs/toolkit';
 
+import {
+  accessToken,
+  userDetails,
+  allUserDetails,
+  allCartData
+} from '../Features';
+
 import { enableMapSet } from 'immer';
 
 enableMapSet();
 
 // Root Reducer
-const combinedReducer = combineReducers({});
+const combinedReducer = combineReducers({
+  accessToken,
+  userDetails,
+  allUserDetails,
+  allCartData
+});
 
 /**
  * Root Reducer State

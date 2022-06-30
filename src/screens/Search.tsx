@@ -1,15 +1,22 @@
-import { View, Text } from 'native-base';
-import React, { FC, memo } from 'react';
+import React, { FC, memo} from 'react';
+import { useScrollValue } from '../utils';
+import { SearchComponents } from '../components';
+const { Container, Header, List } = SearchComponents;
 
 /**
  * Search
  */
-const Search: FC = () => {
+
+const Dashboard: FC = () => {
+  const { scrollClamp: scrollY } = useScrollValue();
+
+
   return (
-    <View>
-      <Text>Search page </Text>
-    </View>
+    <Container>
+      <Header {...{ scrollY }} />
+      <List />
+    </Container>
   );
 };
 
-export default memo(Search);
+export default memo(Dashboard);

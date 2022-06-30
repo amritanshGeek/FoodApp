@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import {
   ParentContainer,
@@ -7,12 +7,8 @@ import { NavigationService } from '../utils';
 import { View } from 'react-native';
 import AppDrawer from './HomeDrawerNavigator';
 import {
-    Home,
+    Dashboard,
     Cart,
-    Drawer,
-    Swiggy,
-    Food,
-    Instamart,
     Search,
     Account,
 } from '../screens';
@@ -42,18 +38,13 @@ const AppNavigator: FC = () => {
           />
           <AppStack.Screen
             name={NavigationService.ScreenNames.Dashboard}
-            component={Swiggy}
+            component={Dashboard}
             options={{ title: 'Dashboard' }}
           />
           <AppStack.Screen
-            name={NavigationService.ScreenNames.Food}
-            options={{ title: 'Food' }}
-            component={Food}
-          />
-          <AppStack.Screen
-            name={NavigationService.ScreenNames.Instamart}
-            component={Instamart}
-            options={{ title: 'Instamart' }}
+            name={NavigationService.ScreenNames.Cart}
+            options={{ title: 'Cart' }}
+            component={Cart}
           />
           <AppStack.Screen
             name={NavigationService.ScreenNames.Search}

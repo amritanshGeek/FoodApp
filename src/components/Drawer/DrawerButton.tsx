@@ -2,6 +2,7 @@ import { Colors, FontSize, reSize } from '../../utils';
 import React, { FC, memo } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+MaterialCommunityIcons.loadFont();
 
 /**
  * DrawerButtonProps

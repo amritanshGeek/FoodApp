@@ -1,18 +1,22 @@
 import React, { FC, useEffect } from 'react';
 import { createBottomTabNavigator, BottomTabBarProps } from '@react-navigation/bottom-tabs';
-import { Account, Food, Instamart, Search, Swiggy } from '../screens';
-import { NavigationService } from '../utils';
+import { Account, Cart, Search, Dashboard } from '../screens';
+import { NavigationService, reSize } from '../utils';
 import { DrawerActions } from '@react-navigation/routers';
 import {Colors} from '../utils';
-// HomeTab
+import { TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Text, View } from 'native-base';
+Ionicons.loadFont();
+MaterialCommunityIcons.loadFont();
 const { Navigator, Screen } = createBottomTabNavigator();
-import { View, Text, TouchableOpacity } from 'react-native';
 
 type TabBarProps = BottomTabBarProps & {};
 
 const MyTabBar: FC<TabBarProps> =({ state, descriptors, navigation })=> {
   return (
-    <View style={{ flexDirection: 'row' }}>
+    <View style={{alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -43,10 +47,11 @@ const MyTabBar: FC<TabBarProps> =({ state, descriptors, navigation })=> {
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{ flex: 1 , height:60}}
+            style={{ flex: 1 , height:60,alignItems:'center'}}
             key={index}
           >
-            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
+            <MaterialCommunityIcons name={index==1?'store-search':route.name.toLocaleLowerCase()} color={'#000'} size={20} />
+            <Text bold={isFocused} style={{ color: isFocused ? '#673ab7' : '#222' }}>
               {label}
             </Text>
           </TouchableOpacity>
@@ -70,17 +75,37 @@ const HomeTabNavigator: FC = () => {
       }}
       tabBar={props => <MyTabBar {...props} />}>
       <Screen
-        name="Swiggy"
+        name="Home"
         options={{
-          // headerShown: false,
+          headerShown: false,
+          tabBarLabel: 'Home',
         }}
-        component={Swiggy}
+        component={Dashboard}
       />
-      {/* MaterialCommunityIcons */}
-      <Screen name="Food" component={Food} />
-      <Screen name="Instamart" component={Instamart} />
-      <Screen name="Search" component={Search} />
-      <Screen name="Account" component={Account} />
+      <Screen
+        name="Search"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Search',
+        }}
+        component={Search}
+      />
+      <Screen
+        name="Cart"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Cart',
+        }} 
+        component={Cart}
+      />
+      <Screen
+        name="Account"
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Profile',
+        }}
+        component={Account}
+      />
     </Navigator>
   );
 };

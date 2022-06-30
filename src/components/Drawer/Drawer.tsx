@@ -1,12 +1,15 @@
-import React, { FC, memo, useCallback } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { FC, memo, useCallback, useContext } from 'react';
+import { View, StyleSheet, Alert } from 'react-native';
 import { DrawerContentComponentProps } from '@react-navigation/drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { NavigationService, Colors } from '../../utils';
+import { NavigationService, Colors, reSize } from '../../utils';
 import { DrawerActions } from '@react-navigation/native';
 import DrawerButton from './DrawerButton';
-// import { dispatch } from '@store';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { dispatch } from '../../store';
+import { removeAccessToken, removeUserDetails, removeUsersDataDetails } from '../../Features';
+import { AuthContext } from '../../navigators/AuthProvider';
 
 /**
  * DrawerProps
@@ -19,21 +22,34 @@ type DrawerProps = DrawerContentComponentProps & {};
 const Drawer: FC<DrawerProps> = () => {
   const { top, bottom } = useSafeAreaInsets();
   // const { t } = useTranslation();
+    const {logout}= useContext(AuthContext);
 
-  // const onLogoutPressed = useCallback(() => {
-  //   Alert?.open({
-  //     title: t('text.logout'),
-  //     description: t('text.logoutDescription'),
-  //     onPressConfirm: () => {
-  //       NavigationService.replace('Auth');
-  //       dispatch({ type: 'RESET' });
-  //       console.log('lgout now');
-  //     },
-  //     onPressCancel: () => {
-  //       console.log('cancel logo8ut');
-  //     },
-  //   });
-  // }, [t]);
+  const onLogoutPressed = useCallback(() => {
+    // Alert.alert('logout pressed');
+    Alert.alert(  
+      'Are You Sure Want to Logout',
+      '',
+      [  
+        {  
+          text: 'Cancel',  
+          onPress: () => {},
+          style: 'cancel',  
+        },  
+        {
+          text: 'Yes', 
+          onPress: () => {
+            logout();
+            // dispatch(removeAccessToken());
+            // dispatch(removeUserDetails());
+            // // dispatch(removeUsersDataDetails());
+            // NavigationService.replace('Auth');
+            // // dispatch({ type: 'RESET' });
+            // console.log('lgout now');
+          }
+        },  
+      ]
+    );
+  }, []);
   return (
     <View style={[styles.container, { backgroundColor: Colors.LIGHT_BACKGROUND }]}>
       <ScrollView
@@ -45,11 +61,20 @@ const Drawer: FC<DrawerProps> = () => {
         showsVerticalScrollIndicator={false}>
         {/* User Icon */}
         {/* <UserDetails /> */}
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: reSize(20),
+          }}>
+          <Ionicons name="logo-foursquare" color="orange" size={reSize(50)} />
+        </View>
         <DrawerButton
           onPress={() => {
-            NavigationService.navigate(
-              NavigationService.ScreenNames.Cart,
-            );
+            // NavigationService.navigate(
+            //   NavigationService.ScreenNames.Cart,
+            // );
             NavigationService.dispatch(DrawerActions.closeDrawer());
           }}
           icon="food-takeout-box"
@@ -61,9 +86,9 @@ const Drawer: FC<DrawerProps> = () => {
           text="Food Home"
           badge={4}
           onPress={() => {
-            NavigationService.navigate(
-              NavigationService.ScreenNames.Home,
-            );
+            // NavigationService.navigate(
+            //   NavigationService.ScreenNames.Home,
+            // );
             NavigationService.dispatch(DrawerActions.closeDrawer());
           }}
         />
@@ -71,15 +96,15 @@ const Drawer: FC<DrawerProps> = () => {
           icon="food-variant"
           text="New Varieties"
           onPress={() => {
-            NavigationService.navigate(NavigationService.ScreenNames.Varieties);
+            // NavigationService.navigate(NavigationService.ScreenNames.Varieties);
             NavigationService.dispatch(DrawerActions.closeDrawer());
           }}
         />
-        {/* <DrawerButton
+        <DrawerButton
           icon="logout"
-          text="navigation.logout"
+          text="Logout"
           onPress={onLogoutPressed}
-        /> */}
+        />
       </ScrollView>
     </View>
   );
