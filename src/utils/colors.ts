@@ -15,6 +15,7 @@ export const Colors = {
   LIGHT_TEXT: '#94A3B8',
   DARK_TEXT_DARK_MODE: '#ffffff',
   LIGHT_TEXT_DARK_MODE: '#cccccc',
+  THEME_COLOR: '#fb923c',
 };
 
 export const GradientColorsArray = Object.values(GradientColors);

@@ -4,6 +4,11 @@ import {
   Text,
   FlatList,
   Icon,
+  Alert,
+  VStack,
+  HStack,
+  IconButton,
+  CloseIcon,
 } from 'native-base';
 import {FoodItemCard, HeaderLeft, ParentContainer, SearchBar} from '../Commons';
 import styles from './styles';
@@ -17,7 +22,7 @@ import Animated, {
     useAnimatedStyle,
     // useSharedValue,
    } from 'react-native-reanimated';
-import { StyleProp, ViewStyle } from 'react-native';
+import { Dimensions, StyleProp, ViewStyle, Alert as RNAlert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -94,13 +99,37 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
   }
 )
 
+const AlertTag:FC = memo(() => {
+  return(
+    <Alert w="100%" status={'success'}>
+      <VStack space={2} flexShrink={1} w="100%">
+        <HStack flexShrink={1} space={2} justifyContent="space-between">
+          <HStack space={2} flexShrink={1}>
+            <Alert.Icon mt="1" />
+            <Text fontSize="md" color="coolGray.800">
+              {'Order Placed Successfully'}
+            </Text>
+          </HStack>
+          <IconButton variant="unstyled" _focus={{
+        borderWidth: 0
+      }} icon={<CloseIcon size="3" color="coolGray.600" />} />
+        </HStack>
+      </VStack>
+    </Alert>
+  )
+})
+
 const OrderPlace:FC = memo(() => {
   return(
-    <View height={60} width={'full'} justifyContent={'center'} alignItems={'center'} bgColor={'green.400'}>
-      {/* <TouchableOpacity style={{flex:1,justifyContent:'center',alignItems:'center', backgroundColor:'green',height:60}}> */}
-        <Text>Place Order</Text>
-      {/* </TouchableOpacity> */}
-    </View>
+    <TouchableOpacity 
+      onPress={()=>{
+        RNAlert.alert('Order Placed Successfully');
+        dispatch(emptyCartData());
+        // return <AlertTag />
+      }}
+      style={{justifyContent:'center',alignItems:'center', width:Dimensions.get('screen').width, backgroundColor: Colors.THEME_COLOR, height:60, alignSelf:'flex-end'}}>
+      <Text>Place Order</Text>
+    </TouchableOpacity>
   )
 })
 
@@ -148,7 +177,10 @@ export const List: FC = memo(() => {
               )
             }}
           />
-          <OrderPlace />
+          {allData?.length?
+            <OrderPlace />
+            :null
+          }
         </View>
       );
 });

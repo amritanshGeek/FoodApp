@@ -31,7 +31,7 @@ const FoodItemCard: FC<FoodComponentProps> = ({item,index,onAddPress}) => {
                                 <Text fontSize="sm" color="black">
                                     {item.strArea || 'Area Name'}
                                 </Text>
-                                <Text color="black" fontSize="xl">
+                                <Text numberOfLines={1} width={120} color="black" fontSize="xl">
                                     {item.strMeal || 'Meal Name'}
                                 </Text>
                             </VStack>
