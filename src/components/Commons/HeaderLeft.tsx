@@ -8,7 +8,7 @@ import {
   useNavigationState,
   useRoute,
 } from '@react-navigation/native';
-import { Pressable } from 'native-base';
+import { Pressable, Text } from 'native-base';
 Ionicons.loadFont();
 
 /**

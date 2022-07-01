@@ -19,6 +19,7 @@ export {
 export {
   default as allCartData,
   setCartData,
+  reduceCartCount,
   updateCartData,
   removefromCart,
   emptyCartData,

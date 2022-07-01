@@ -2,6 +2,7 @@ import React, {
   FC,
   memo,
   useContext,
+  useEffect,
   useState,
 } from 'react';
 import {
@@ -36,8 +37,8 @@ export const Container: FC = ({ children }) => {
 
 
 export const List: FC = memo(() => {
-    const [email,setEmail]=useState<string | undefined>();
-    const [pass,setPass]=useState<string | undefined>();
+    const [email,setEmail]=useState<string | undefined>('Amritanshm21@gmail.com');
+    const [pass,setPass]=useState<string | undefined>('Test@123');
     const [isVisible,setIsVisible]=useState<boolean | undefined>(false);
     const toast = useToast();
     const allData = useSelector(state => state.allUserDetails.data);

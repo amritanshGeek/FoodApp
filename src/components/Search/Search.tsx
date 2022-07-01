@@ -150,7 +150,8 @@ export const List: FC = memo(() => {
               dispatch(setCartData(item))
             }}
             item={item}
-            index={index} 
+            index={index}
+            isCart={false}
           />
         )}
         keyExtractor={(item, index) => index.toString()}

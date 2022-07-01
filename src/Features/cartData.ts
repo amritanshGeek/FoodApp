@@ -8,13 +8,28 @@ const userSlice = createSlice({
     name: 'cartData',
     reducers: {
         setCartData: (state, action) => {
-            console.log('state',state);
-            console.log('action',action);
             if(state.data?.length){
                 let alreadyAdded=false;
                 state.data.map((item)=>{
                     if(item.idMeal === action.payload.idMeal){
                         item.cartCount = item.cartCount+1;
+                        alreadyAdded = true;
+                    }
+                    return item;
+                })
+                if(!alreadyAdded){
+                    state.data = [...state.data,{...action.payload,cartCount:1}];
+                }
+            }else{
+                state.data = [{...action.payload,cartCount:1}];
+            }
+        },
+        reduceCartCount: (state, action) => {
+            if(state.data?.length){
+                let alreadyAdded=false;
+                state.data.map((item)=>{
+                    if(item.idMeal === action.payload.idMeal){
+                        item.cartCount = item.cartCount-1;
                         alreadyAdded = true;
                     }
                     return item;
@@ -47,6 +62,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { setCartData,updateCartData, removefromCart, emptyCartData } = userSlice.actions;
+export const { setCartData,updateCartData, removefromCart, emptyCartData, reduceCartCount } = userSlice.actions;
 
 export default userSlice.reducer;

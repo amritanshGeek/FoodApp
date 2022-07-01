@@ -25,7 +25,6 @@ const Drawer: FC<DrawerProps> = () => {
     const {logout}= useContext(AuthContext);
 
   const onLogoutPressed = useCallback(() => {
-    // Alert.alert('logout pressed');
     Alert.alert(  
       'Are You Sure Want to Logout',
       '',

@@ -24,6 +24,7 @@ import { NavigationService } from '../../utils';
 import { setUserDetails, setUsersDataDetails, setAccessToken } from '../../Features';
 import { dispatch } from './../../store/store';
 import { AuthContext } from '../../navigators/AuthProvider';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 AntDesign.loadFont();
   
@@ -40,6 +41,8 @@ export const List: FC = memo(() => {
     const [pass,setPass]=useState<string | undefined>();
     const [cnfPass,setCnfPass]=useState<string | undefined>();
     const toast = useToast();
+    const [isVisible,setIsVisible]=useState<boolean | undefined>(false);
+    const [isCnfVisible,setCnfIsVisible]=useState<boolean | undefined>(false);
 
     const {register}= useContext(AuthContext);
     
@@ -122,6 +125,11 @@ export const List: FC = memo(() => {
                         variant='outline'
                         height={'12'}
                         onChangeText={(text)=>setPass(text)}
+                        InputRightElement={
+                            <TouchableOpacity activeOpacity={1} onPress={()=>setIsVisible(!isVisible)}>
+                                <Icon as={Ionicons} name={isVisible?"eye":"eye-off"} color="orange.400" mr={4} />
+                            </TouchableOpacity>
+                        }
                     />
                 </Box>
                 <Box mt='10' bg={"white"} justifyContent={'flex-start'} >
@@ -133,6 +141,11 @@ export const List: FC = memo(() => {
                         variant='outline'
                         height={'12'}
                         onChangeText={(text)=>setCnfPass(text)}
+                        InputRightElement={
+                            <TouchableOpacity activeOpacity={1} onPress={()=>setCnfIsVisible(!isCnfVisible)}>
+                                <Icon as={Ionicons} name={isCnfVisible?"eye":"eye-off"} color="orange.400" mr={4} />
+                            </TouchableOpacity>
+                        }
                     />
                 </Box>
                 <Box minWidth="300px" mt='10' borderRadius={'full'} alignItems='flex-end' justifyContent={'flex-end'} >

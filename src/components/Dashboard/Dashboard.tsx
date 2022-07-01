@@ -84,6 +84,7 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number>,onFilterPress: 
               // NavigationService.dispatch(DrawerActions.openDrawer());
             }}
           />
+          <Text mt={3} >Location</Text>
           <View
             style={{
               flex: 1,
@@ -94,8 +95,9 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number>,onFilterPress: 
             <HeaderTitle />
           </View>
           <TouchableOpacity
-          onPress={onFilterPress}
-          style={{alignItems:'center',justifyContent:'center',padding:4}}>
+            onPress={onFilterPress}
+            style={{alignItems:'center',justifyContent:'center',padding:4}}
+          >
             <MaterialCommunityIcons name={'filter'} color={'#000'} size={20} />
           </TouchableOpacity>
         </Animated.View>
@@ -231,6 +233,7 @@ export const List: FC = memo(() => {
                     }}
                     item={item}
                     index={index}
+                    isCart={false}
                   />
                 )}
                 keyExtractor={(item, index) => index.toString()}
@@ -257,6 +260,7 @@ export const List: FC = memo(() => {
                 <Modal.Header>Filter</Modal.Header>
                 <Modal.Body>
                   <Box w="3/4" maxW="300">
+                    <Text>Category</Text>
                     <Select
                       selectedValue={selectedCategory}
                       minWidth="200"
@@ -277,6 +281,7 @@ export const List: FC = memo(() => {
                     </Select>
                   </Box>
                   <Box w="3/4" maxW="300">
+                    <Text>Area</Text>
                     <Select
                       selectedValue={selectedArea}
                       minWidth="200"
@@ -297,6 +302,7 @@ export const List: FC = memo(() => {
                     </Select>
                   </Box>
                   <Box w="3/4" maxW="300">
+                    <Text>Ingredient</Text>
                     <Select
                       selectedValue={selectedIngredient}
                       minWidth="200"

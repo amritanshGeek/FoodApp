@@ -27,7 +27,7 @@ import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { dispatch } from '../../store';
-import { emptyCartData } from '../../Features';
+import { emptyCartData, reduceCartCount, removefromCart, setCartData } from '../../Features';
 MaterialIcons.loadFont();
 
 /**
@@ -152,10 +152,18 @@ export const List: FC = memo(() => {
             renderItem={({ item, index }) => ( item?
               <FoodItemCard
                 onAddPress={()=> {
-                  // dispatch(setCartData([...item]))
+                  dispatch(setCartData(item))
+                }}
+                onRemovePress={()=>{
+                  if(item?.cartCount>1){
+                    dispatch(reduceCartCount(item))
+                  }else{
+                    dispatch(removefromCart(item))
+                  }
                 }}
                 item={item}
                 index={index}
+                isCart={true}
               />
               :null
             )}

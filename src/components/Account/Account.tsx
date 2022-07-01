@@ -1,6 +1,7 @@
 import React, {
     FC,
     memo,
+    useCallback,
     useContext,
     useMemo,
 } from 'react';
@@ -24,8 +25,9 @@ import Animated, {
     // useSharedValue,
    } from 'react-native-reanimated';
 import { Colors, NavigationService, useHeaderHeight } from '../../utils';
-import { StyleProp, ViewStyle } from 'react-native';
+import { Alert, StyleProp, ViewStyle } from 'react-native';
 import { AuthContext } from '../../navigators/AuthProvider';
+import DrawerButton from '../Drawer/DrawerButton';
 AntDesign.loadFont();
 
 export const Container: FC = ({ children }) => {
@@ -38,6 +40,27 @@ export const Container: FC = ({ children }) => {
 export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
     ({ scrollY }) => {
       const { headerHeight, header, statusBarHeight } = useHeaderHeight();
+      const {logout}= useContext(AuthContext);
+      const onLogoutPressed = useCallback(() => {
+        Alert.alert(
+          'Are You Sure Want to Logout',
+          '',
+          [  
+            {  
+              text: 'Cancel',  
+              onPress: () => {},
+              style: 'cancel',  
+            },  
+            {
+              text: 'Yes', 
+              onPress: () => {
+                logout();
+                // NavigationService.replace('Auth');
+              }
+            },  
+          ]
+        );
+      }, []);
   
       const headerStyle = useMemo<StyleProp<ViewStyle>>(
         () => ({
@@ -86,6 +109,11 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
             }}>
             <Text fontSize={20} bold>Profile</Text>
           </View>
+          <DrawerButton
+            icon="logout"
+            text="Logout"
+            onPress={onLogoutPressed}
+          />
         </Animated.View>
       )
     }
@@ -107,9 +135,9 @@ export const List: FC = memo(() => {
                 rounded="full"
             />
             <VStack mt={20}>
-                <Text bold fontSize={'lg'}>{`Email: ${user._user.email}`}</Text>
-                <Text bold fontSize={'lg'}>{`Creation Time: ${user._user.metadata.creationTime}`}</Text>
-                <Text bold fontSize={'lg'}>{`Last Sign In Time: ${user._user.metadata.lastSignInTime}`}</Text>
+                <Text bold fontSize={'lg'}>{`Email: ${user?._user.email}`}</Text>
+                <Text bold fontSize={'lg'}>{`Creation Time: ${user?._user.metadata.creationTime}`}</Text>
+                <Text bold fontSize={'lg'}>{`Last Sign In Time: ${user?._user.metadata.lastSignInTime}`}</Text>
             </VStack>
         </View>
     )
