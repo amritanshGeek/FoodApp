@@ -10,7 +10,7 @@ import { FoodItem } from "../../types";
     item: FoodItem;
     index: number;
     onAddPress : () => void;
-    isCart: boolean;
+    isOrderHistory: boolean;
     onRemovePress : () => void;
   };
   
@@ -19,7 +19,7 @@ import { FoodItem } from "../../types";
    */
 
 
-const FoodItemCard: FC<FoodComponentProps> = ({item,index,onAddPress,isCart,onRemovePress}) => {
+const FoodItemCard: FC<FoodComponentProps> = ({item,index,onAddPress,isOrderHistory,onRemovePress}) => {
     return (
       <Box key={index} bg="white" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%">
             <HStack flex={1} justifyContent={'space-between'} >
@@ -39,6 +39,9 @@ const FoodItemCard: FC<FoodComponentProps> = ({item,index,onAddPress,isCart,onRe
                             </VStack>
                         </Box>
                         {item?.cartCount?
+                            isOrderHistory?
+                            <Text>{item.cartCount}</Text>
+                            :
                             <View flexDirection={'row'} justifyContent={'space-between'} style={{borderRadius:20,minWidth:80}} bgColor={'muted.50'} alignItems={'center'} rounded="xs" alignSelf="flex-start" shadow={2}>
                                 <Button bgColor={'muted.50'} onPress={onRemovePress} >
                                     <Text color={'black'}>{'-'}</Text>

@@ -4,7 +4,8 @@ import {
   accessToken,
   userDetails,
   allUserDetails,
-  allCartData
+  allCartData,
+  orderData,
 } from '../Features';
 
 import { enableMapSet } from 'immer';
@@ -16,7 +17,8 @@ const combinedReducer = combineReducers({
   accessToken,
   userDetails,
   allUserDetails,
-  allCartData
+  allCartData,
+  orderData
 });
 
 /**

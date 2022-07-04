@@ -24,6 +24,7 @@ type HeaderLeftProps = {
 /**
  * HeaderLeft
  */
+
 const HeaderLeft: FC<HeaderLeftProps> = props => {
   const { isMenuIcon, icon, onPress, color = '#fff' } = props;
   const { header } = useHeaderHeight();

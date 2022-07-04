@@ -77,4 +77,5 @@ export const ScreenNames = {
   Dashboard: 'Dashboard',
   Search: 'Search',
   Account: 'Account',
+  OrderHistory: 'OrderHistory',
 };

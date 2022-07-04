@@ -14,7 +14,7 @@ const persistConfig: PersistConfig<any> = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['accessToken', 'userDetails','allUserDetails','allCartData'],
+  whitelist: ['accessToken', 'userDetails','allUserDetails','allCartData','orderData'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

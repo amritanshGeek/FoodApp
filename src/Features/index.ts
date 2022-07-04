@@ -24,3 +24,10 @@ export {
   removefromCart,
   emptyCartData,
 } from './cartData';
+
+export {
+  default as orderData,
+  setOrderHistory,
+  removefromOrderHistory,
+  emptyOrderHistoryData
+} from './orderData';

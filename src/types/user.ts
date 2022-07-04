@@ -117,6 +117,17 @@ export type cartDataType = {
   data?: FoodItem[];
 };
 
+export type orderDataItem = {
+  orderData?: FoodItem[];
+  orderId: string;
+  orderName: string;
+}
+
+export type orderDataType = {
+  data?: orderDataItem[];
+  orderCount?: number;
+}
+
 
 export type categoryItem = {
   strCategory: string,

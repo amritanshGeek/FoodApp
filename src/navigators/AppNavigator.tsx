@@ -11,6 +11,7 @@ import {
     Cart,
     Search,
     Account,
+    OrderHistory,
 } from '../screens';
 
 const AppStack = createStackNavigator();
@@ -58,6 +59,13 @@ const AppNavigator: FC = () => {
               header: () => <View />,
             }}
             component={Account}
+          />
+          <AppStack.Screen
+            name={NavigationService.ScreenNames.OrderHistory}
+            options={{
+              headerShown: false,
+            }}
+            component={OrderHistory}
           />
         </AppStack.Navigator>
     </ParentContainer>

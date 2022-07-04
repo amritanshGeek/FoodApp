@@ -27,7 +27,7 @@ import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { dispatch } from '../../store';
-import { emptyCartData, reduceCartCount, removefromCart, setCartData } from '../../Features';
+import { emptyCartData, reduceCartCount, removefromCart, setCartData, setOrderHistory } from '../../Features';
 MaterialIcons.loadFont();
 
 /**
@@ -120,14 +120,24 @@ const AlertTag:FC = memo(() => {
 })
 
 const OrderPlace:FC = memo(() => {
+  const allData = useSelector(state => state.allCartData.data);
   return(
     <TouchableOpacity 
       onPress={()=>{
         RNAlert.alert('Order Placed Successfully');
-        dispatch(emptyCartData());
+        dispatch(setOrderHistory({orderData:allData, orderId: Date.now()}));
+        setTimeout(()=>dispatch(emptyCartData()),100);
+
         // return <AlertTag />
       }}
-      style={{justifyContent:'center',alignItems:'center', width:Dimensions.get('screen').width, backgroundColor: Colors.THEME_COLOR, height:60, alignSelf:'flex-end'}}>
+      style={{
+        justifyContent:'center',
+        alignItems:'center',
+        width:Dimensions.get('screen').width,
+        backgroundColor: Colors.THEME_COLOR,
+        height:60,
+        alignSelf:'flex-end'
+      }}>
       <Text>Place Order</Text>
     </TouchableOpacity>
   )
@@ -149,7 +159,7 @@ export const List: FC = memo(() => {
             data={allData||[]}
             keyboardShouldPersistTaps='always'
             keyboardDismissMode='on-drag'
-            renderItem={({ item, index }) => ( item?
+            renderItem={({ item, index }) => (
               <FoodItemCard
                 onAddPress={()=> {
                   dispatch(setCartData(item))
@@ -163,9 +173,8 @@ export const List: FC = memo(() => {
                 }}
                 item={item}
                 index={index}
-                isCart={true}
+                isOrderHistory={false}
               />
-              :null
             )}
             keyExtractor={(item, index) => index.toString()}
             onEndReachedThreshold={0.5}

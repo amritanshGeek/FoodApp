@@ -12,6 +12,7 @@ import {
     Center,
     Image,
     VStack,
+    Button,
 } from 'native-base';
 import { HeaderLeft, ParentContainer } from '../Commons';
 import styles from './styles';
@@ -105,7 +106,7 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
               flex: 1,
               alignItems: 'center',
               justifyContent: 'center',
-              paddingRight: header,
+              // paddingRight: header,
             }}>
             <Text fontSize={20} bold>Profile</Text>
           </View>
@@ -127,7 +128,7 @@ export const List: FC = memo(() => {
         <View flex={1} alignItems={'center'}>
             <Image 
                 source={{
-                    uri: 'https://media.vanityfair.com/photos/5ba12e6d42b9d16f4545aa19/3:2/w_1998,h_1332,c_limit/t-Avatar-The-Last-Airbender-Live-Action.jpg'
+                    uri: 'https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture-986x1024.jpg'
                 }}
                 alt="Aang flying and surrounded by clouds"
                 height="200"
@@ -139,6 +140,9 @@ export const List: FC = memo(() => {
                 <Text bold fontSize={'lg'}>{`Creation Time: ${user?._user.metadata.creationTime}`}</Text>
                 <Text bold fontSize={'lg'}>{`Last Sign In Time: ${user?._user.metadata.lastSignInTime}`}</Text>
             </VStack>
+            <Button width={'full'} height={60} mt={20} onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.OrderHistory)} >
+              Check Order History
+            </Button>
         </View>
     )
 });

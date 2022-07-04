@@ -231,9 +231,10 @@ export const List: FC = memo(() => {
                     onAddPress={()=> {
                       dispatch(setCartData(item))
                     }}
+                    onRemovePress={()=>{}}
                     item={item}
                     index={index}
-                    isCart={false}
+                    isOrderHistory={false}
                   />
                 )}
                 keyExtractor={(item, index) => index.toString()}
