@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "186437813678",
+    "project_id": "food-clone-app-5a085",
+    "storage_bucket": "food-clone-app-5a085.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186437813678:android:bbfbf5ad7eef0d333c343f",
+        "android_client_info": {
+          "package_name": "com.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186437813678-3r9vpllhfl02innj7gbhh9i2jqg95f4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn3Vc9Tewhb1U8vCfIOE43iN3xR2RB-6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186437813678-3r9vpllhfl02innj7gbhh9i2jqg95f4g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "186437813678-v8ctuaek18mf78virsha9dqt4p1n0tou.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.foodAppClone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

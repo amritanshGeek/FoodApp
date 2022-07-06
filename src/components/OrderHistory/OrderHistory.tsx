@@ -29,7 +29,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { dispatch } from '../../store';
 import { emptyOrderHistoryData, removefromOrderHistory } from '../../Features';
-import { FoodItem, orderDataItem } from '../../types';
+import { FoodItem } from '../../types';
 
 AntDesign.loadFont();
 MaterialIcons.loadFont();

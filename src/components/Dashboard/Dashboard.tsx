@@ -27,6 +27,7 @@ import { ActivityIndicator, StyleProp, TouchableOpacity, ViewStyle } from 'react
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { dispatch } from './../../store/store';
 import { setCartData } from '../../Features';
+import firestore from '@react-native-firebase/firestore';
 MaterialCommunityIcons.loadFont();
 
 /**
@@ -141,7 +142,13 @@ export const List: FC = memo(() => {
       getCategoryData();
       getAreaData();
       getIngredientsData();
+      getDataFromDashboard();
     }, []);
+
+    const getDataFromDashboard = async() => {
+      const search = await firestore().collection('search').get();
+      console.log('search from firestore',search);
+    }
   
     const getDashboardData:FC =async()=>{
       const getData: GetData = {
