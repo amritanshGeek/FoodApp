@@ -88,11 +88,10 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            paddingRight: header,
           }}>
           <Text fontSize={20} bold>Cart</Text>
         </View>
-        <TouchableOpacity style={{padding:2}} onPress={()=>dispatch(emptyCartData())}>
+        <TouchableOpacity style={{padding:2,position:'absolute',top:0,right:0}} onPress={()=>dispatch(emptyCartData())}>
           <Icon  as={MaterialIcons} name='delete-forever' color={'orange.400'} size={10} />
         </TouchableOpacity>
       </Animated.View>

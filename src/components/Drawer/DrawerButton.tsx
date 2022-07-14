@@ -12,6 +12,7 @@ type DrawerButtonProps = {
   onPress?: () => void;
   text: string;
   badge?: number;
+  position?: string
 };
 
 const size = reSize(20);
@@ -21,10 +22,10 @@ const buttonSize = reSize(60);
  * DrawerButton
  */
 const DrawerButton: FC<DrawerButtonProps> = props => {
-  const { icon, onPress, text } = props;
+  const { icon, onPress, text, position } = props;
 
   return (
-    <TouchableOpacity {...{ onPress }} style={styles.container}>
+    <TouchableOpacity {...{ onPress }} style={position?styles.absoluteContainer:styles.container}>
       <View style={styles.iconContainer}>
         <MaterialCommunityIcons name={icon} color={Colors.DARK_TEXT} size={size} />
       </View>
@@ -33,7 +34,7 @@ const DrawerButton: FC<DrawerButtonProps> = props => {
           style={[
             styles.text,
             {
-              marginLeft: reSize(10),
+              marginLeft: position?0:reSize(10),
               color: Colors.DARK_TEXT,
             },
           ]}
@@ -58,6 +59,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: reSize(30),
+  },
+  absoluteContainer: {
+    position:'absolute',
+    right: 0,
+    top: 40,
+    // alignSelf: 'stretch',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingRight: reSize(30),
   },
   textContainer: {
     flex: 1,

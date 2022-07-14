@@ -18,6 +18,7 @@ type HeaderLeftProps = {
   onPress?: () => void;
   icon?: string;
   color?: string;
+  text: string;
 };
 
 /**
@@ -25,17 +26,18 @@ type HeaderLeftProps = {
  */
 
 const HeaderLeft: FC<HeaderLeftProps> = props => {
-  const { isMenuIcon, icon, onPress, color = '#fff' } = props;
+  const { isMenuIcon, icon, onPress, color = '#fff', text } = props;
   const { header } = useHeaderHeight();
   return (
     <Pressable
       {...{ onPress }}
-      style={[styles.container, { height: header, width: header }]}>
+      style={[styles.container, { height: header, width: header },text?{flex:1}:{position:'absolute',left:0,top:50,zIndex:99}]}>
       <Ionicons
         name={isMenuIcon ? 'location' : icon || 'arrow-back'}
         size={20}
         color={color}
       />
+      {text?<Text alignSelf={'center'} mt={3} color={'black'} >{text}</Text>:null}
     </Pressable>
   );
 };
@@ -49,7 +51,10 @@ export default memo(
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    // flex:1,
+    flexDirection:'row',
+    marginLeft:10,
   },
 });

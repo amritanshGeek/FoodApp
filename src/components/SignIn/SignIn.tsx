@@ -16,6 +16,8 @@ import {
   Input,
   Icon,
   useToast,
+  KeyboardAvoidingView,
+  ScrollView,
 } from 'native-base';
 import { ParentContainer } from '../Commons';
 import styles from './styles';
@@ -80,11 +82,13 @@ export const List: FC = memo(() => {
     }
 
     return(
-        <Center pt={20} flex={1} _dark={{
+        <ScrollView pt={20} flex={1} _dark={{
             bg: "coolGray.800"
-          }} _light={{
+        }} _light={{
             bg: "warmGray.50"
-          }}>
+        }}
+            contentContainerStyle={{justifyContent:'center',alignItems:'center'}}
+        >
             <Box flex="1" alignItems='flex-start' mt='20' bg={useColorModeValue("warmGray.50", "coolGray.800")} >
                 <Text bold fontSize="3xl" display="flex"  _dark={{
                         bg: "coolGray.800"
@@ -133,13 +137,13 @@ export const List: FC = memo(() => {
                     </Button>
                 </Box>
             </Box>
-            <Box m='10' borderRadius={'full'} justifyContent={'flex-start'} flexDirection={'row'}>
+            <Box m='10' borderRadius={'full'} justifyContent={'flex-start'} flexDirection={'row'} >
                 <Text _light={{color:'coolGray.400'}} _dark={{color: "white"}} >Don't have an account? </Text> 
                 <TouchableOpacity onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.SignUp)}>
                     <Text bold color={'orange.400'} >Sign up</Text>
                 </TouchableOpacity>
             </Box>
-        </Center>
+        </ScrollView>
     )
 });
   
