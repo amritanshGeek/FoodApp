@@ -26,9 +26,11 @@ import { Dimensions, StyleProp, ViewStyle, Alert as RNAlert } from 'react-native
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { dispatch } from '../../store';
 import { emptyCartData, reduceCartCount, removefromCart, setCartData, setOrderHistory } from '../../Features';
 MaterialIcons.loadFont();
+Ionicons.loadFont();
 
 /**
  * Dashboard
@@ -145,6 +147,7 @@ const OrderPlace:FC = memo(() => {
 
 export const List: FC = memo(() => {
     const allData = useSelector(state => state.allCartData.data);
+    const orderData = useSelector(state => state.orderData.data);
 
     return (
         <View flex={1} justifyContent={'center'} alignItems={'center'}>
@@ -179,19 +182,37 @@ export const List: FC = memo(() => {
             keyExtractor={(item, index) => index.toString()}
             onEndReachedThreshold={0.5}
             ListEmptyComponent={()=>{
-              return (
-                <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  <Text
-                    style={{
-                      paddingVertical: 20,
-                      color: '#000',
-                      fontSize: 15
-                    }}
-                  >
-                    No Food added yet
+              return orderData?.length?
+              <View bgColor={'green.400'} flex={1} width={'full'} height={100} justifyContent={'center'} borderRadius={'2xl'} >
+                <HStack alignItems={'center'} p={5} >
+                  <Icon  as={Ionicons} name='checkmark-done-outline' color={'white'} size={10} />
+                  <Text fontSize={16} ml={2}>
+                    Thankyou for Ordering with us
                   </Text>
-                </View>
-              )
+                </HStack>
+                <TouchableOpacity 
+                  onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.Home)}
+                  style={{
+                    backgroundColor: Colors.THEME_COLOR,
+                    borderBottomLeftRadius:24,
+                    borderBottomRightRadius:24,
+                    alignItems:'center'
+                  }}>
+                  <Text>Press here for Continue Ordering</Text>
+                </TouchableOpacity>
+              </View>
+              :
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Text
+                  style={{
+                    paddingVertical: 20,
+                    color: '#000',
+                    fontSize: 15
+                  }}
+                >
+                  No Food added yet
+                </Text>
+              </View>
             }}
           />
           {allData?.length?
