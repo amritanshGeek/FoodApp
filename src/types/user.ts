@@ -59,6 +59,7 @@ export type UserState = ReducerState<User>;
 export type FoodItem = {
   dateModified: string;
   idMeal: string;
+  price: string;
   strArea: string;
   strCategory: string;
   strCreativeCommonsConfirmed: string;
@@ -116,6 +117,18 @@ export type FoodItem = {
 export type cartDataType = {
   data?: FoodItem[];
 };
+
+export type orderDataItem = {
+  orderData?: FoodItem[];
+  orderId: string;
+  orderName: string;
+  totalPrice: number;
+}
+
+export type orderDataType = {
+  data?: orderDataItem[];
+  orderCount?: number;
+}
 
 
 export type categoryItem = {

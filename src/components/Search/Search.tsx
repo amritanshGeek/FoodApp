@@ -2,18 +2,6 @@ import React, {FC, memo, useEffect, useMemo, useState} from 'react';
 import {
   View,
   Text,
-  Box,
-  Center,
-  Button,
-  useColorMode,
-  useColorModeValue,
-  Input,
-  Icon,
-  useToast,
-  HStack,
-  VStack,
-  Pressable,
-  Image,
   FlatList,
 } from 'native-base';
 import {HeaderLeft, ParentContainer, SearchBar, FoodItemCard} from '../Commons';
@@ -29,10 +17,12 @@ import Animated, {
 import { Linking, StyleProp, ViewStyle } from 'react-native';
 import { dispatch } from '../../store';
 import { setCartData } from '../../Features';
+import firestore from '@react-native-firebase/firestore';
 
 /**
- * Dashboard
+ * Search
  */
+
 export const Container: FC = ({children}) => {
     return (
         <ParentContainer style={[styles.container]}>{children}</ParentContainer>
@@ -110,16 +100,17 @@ export const List: FC = memo(() => {
   
   const getDashboardData:FC =async()=>{
     setLoader(true);
-    const getData: GetData = {
-        endPoint: Api.EndPoint.SEARCH,
-        params: {s:searchText}
-    };
+    // const getData: GetData = {
+    //     endPoint: Api.EndPoint.SEARCH,
+    //     params: {s:searchText}
+    // };
     // console.log('getData:', getData);
-    const response = await Api.get(getData);
-    const res =  (response.data as any).meals as FoodItem[];
-    // console.log('response on dashboard',response);
-    if(res.length){
-        setMealData(res);
+    // const response = await Api.get(getData);
+    // const res =  (response.data as any).meals as FoodItem[];
+    const response = await firestore().collection('search').where('strMeal', '>=', searchText).where('strMeal', '<', searchText+'z').get();
+    // console.log('response on search',response);
+    if(response?._docs){
+      setMealData(response._docs);
     }
     setLoader(false);
   }
@@ -147,10 +138,12 @@ export const List: FC = memo(() => {
         renderItem={({ item, index }) => (
           <FoodItemCard
             onAddPress={()=> {
-              dispatch(setCartData(item))
+              dispatch(setCartData(item._data))
             }}
-            item={item}
-            index={index} 
+            onRemovePress={()=>{}}
+            item={item._data}
+            index={index}
+            isOrderHistory={false}
           />
         )}
         keyExtractor={(item, index) => index.toString()}

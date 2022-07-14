@@ -2,13 +2,12 @@ import React, { FC, memo, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { reSize, useHeaderHeight } from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import HeaderIcon from './HeaderIcon';
 import {
   useNavigation,
   useNavigationState,
   useRoute,
 } from '@react-navigation/native';
-import { Pressable } from 'native-base';
+import { Pressable, Text } from 'native-base';
 Ionicons.loadFont();
 
 /**
@@ -24,6 +23,7 @@ type HeaderLeftProps = {
 /**
  * HeaderLeft
  */
+
 const HeaderLeft: FC<HeaderLeftProps> = props => {
   const { isMenuIcon, icon, onPress, color = '#fff' } = props;
   const { header } = useHeaderHeight();
@@ -39,19 +39,6 @@ const HeaderLeft: FC<HeaderLeftProps> = props => {
     </Pressable>
   );
 };
-
-export const SuggestionHeaderRight: FC = memo(() => {
-  const route = useNavigationState(state =>
-    state.routes.find(({ name }) => name === 'Suggestions'),
-  );
-
-  const insideRoute = useMemo(
-    () => route?.state?.routes[0].state?.index || 0,
-    [route?.state?.routes[0].state?.index],
-  );
-  if (route?.state?.index === 1) return <View />;
-  return <HeaderIcon icon="settings" />;
-});
 
 export default memo(
   HeaderLeft,

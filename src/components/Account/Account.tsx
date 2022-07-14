@@ -1,31 +1,31 @@
 import React, {
     FC,
     memo,
+    useCallback,
     useContext,
     useMemo,
 } from 'react';
 import {
     View,
     Text,
-    Box,
-    Center,
     Image,
     VStack,
+    Button,
+    HStack,
 } from 'native-base';
 import { HeaderLeft, ParentContainer } from '../Commons';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Animated, {
-    Extrapolate,
-    // Extrapolation,
-    interpolate,
-    // interpolateNode,
-    useAnimatedStyle,
-    // useSharedValue,
-   } from 'react-native-reanimated';
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { Colors, NavigationService, useHeaderHeight } from '../../utils';
-import { StyleProp, ViewStyle } from 'react-native';
+import { Alert, StyleProp, ViewStyle } from 'react-native';
 import { AuthContext } from '../../navigators/AuthProvider';
+import DrawerButton from '../Drawer/DrawerButton';
+import moment from 'moment';
 AntDesign.loadFont();
 
 export const Container: FC = ({ children }) => {
@@ -38,6 +38,27 @@ export const Container: FC = ({ children }) => {
 export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
     ({ scrollY }) => {
       const { headerHeight, header, statusBarHeight } = useHeaderHeight();
+      const {logout}= useContext(AuthContext);
+      const onLogoutPressed = useCallback(() => {
+        Alert.alert(
+          'Are You Sure Want to Logout',
+          '',
+          [  
+            {  
+              text: 'Cancel',  
+              onPress: () => {},
+              style: 'cancel',  
+            },  
+            {
+              text: 'Yes', 
+              onPress: () => {
+                logout();
+                // NavigationService.replace('Auth');
+              }
+            },  
+          ]
+        );
+      }, []);
   
       const headerStyle = useMemo<StyleProp<ViewStyle>>(
         () => ({
@@ -82,10 +103,15 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
               flex: 1,
               alignItems: 'center',
               justifyContent: 'center',
-              paddingRight: header,
+              // paddingRight: header,
             }}>
             <Text fontSize={20} bold>Profile</Text>
           </View>
+          <DrawerButton
+            icon="logout"
+            text="Logout"
+            onPress={onLogoutPressed}
+          />
         </Animated.View>
       )
     }
@@ -99,7 +125,7 @@ export const List: FC = memo(() => {
         <View flex={1} alignItems={'center'}>
             <Image 
                 source={{
-                    uri: 'https://media.vanityfair.com/photos/5ba12e6d42b9d16f4545aa19/3:2/w_1998,h_1332,c_limit/t-Avatar-The-Last-Airbender-Live-Action.jpg'
+                    uri: 'https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture-986x1024.jpg'
                 }}
                 alt="Aang flying and surrounded by clouds"
                 height="200"
@@ -107,10 +133,22 @@ export const List: FC = memo(() => {
                 rounded="full"
             />
             <VStack mt={20}>
-                <Text bold fontSize={'lg'}>{`Email: ${user._user.email}`}</Text>
-                <Text bold fontSize={'lg'}>{`Creation Time: ${user._user.metadata.creationTime}`}</Text>
-                <Text bold fontSize={'lg'}>{`Last Sign In Time: ${user._user.metadata.lastSignInTime}`}</Text>
+              <HStack>
+                <Text bold fontSize={'lg'}>{'Email: '}</Text>
+                <Text fontSize={'lg'}>{user?._user.email}</Text>
+              </HStack>
+              <HStack>
+                <Text bold fontSize={'lg'}>{'Creation Time: '}</Text>
+                <Text fontSize={'lg'}>{moment(user?._user.metadata.creationTime).format('llll')}</Text>
+              </HStack>
+              <HStack>
+                <Text bold fontSize={'lg'}>{'Last Sign In Time: '}</Text>
+                <Text fontSize={'lg'}>{moment(user?._user.metadata.lastSignInTime).format('llll')}</Text>
+              </HStack>
             </VStack>
+            <Button width={'full'} height={60} mt={20} onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.OrderHistory)} >
+              <Text bold color={'white'}>Check Order History</Text>
+            </Button>
         </View>
     )
 });

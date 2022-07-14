@@ -27,6 +27,7 @@ import { ActivityIndicator, StyleProp, TouchableOpacity, ViewStyle } from 'react
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { dispatch } from './../../store/store';
 import { setCartData } from '../../Features';
+import firestore from '@react-native-firebase/firestore';
 MaterialCommunityIcons.loadFont();
 
 /**
@@ -84,6 +85,7 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number>,onFilterPress: 
               // NavigationService.dispatch(DrawerActions.openDrawer());
             }}
           />
+          <Text mt={3} >Location</Text>
           <View
             style={{
               flex: 1,
@@ -94,8 +96,9 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number>,onFilterPress: 
             <HeaderTitle />
           </View>
           <TouchableOpacity
-          onPress={onFilterPress}
-          style={{alignItems:'center',justifyContent:'center',padding:4}}>
+            onPress={onFilterPress}
+            style={{alignItems:'center',justifyContent:'center',padding:4}}
+          >
             <MaterialCommunityIcons name={'filter'} color={'#000'} size={20} />
           </TouchableOpacity>
         </Animated.View>
@@ -135,84 +138,102 @@ export const List: FC = memo(() => {
     const finalRef = useRef(null);
 
     useEffect(() => {
-      getDashboardData();
+      setLoader(true);
+      // getDashboardData();
       getCategoryData();
       getAreaData();
       getIngredientsData();
+      getDataFromDashboard();
     }, []);
+
+    const getDataFromDashboard = async() => {
+      const search = await firestore().collection('search').get();
+      // console.log('search from firestore',search);
+      setMealData(search._docs);
+      setLoader(false);
+    }
   
     const getDashboardData:FC =async()=>{
-      const getData: GetData = {
-        endPoint: Api.EndPoint.SEARCH,
-        params: {s:''}
-      };
-      // console.log('getData:', getData);
-      const response = await Api.get(getData);
-      // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setMealData(response.data.meals);
-      }
+      // const getData: GetData = {
+      //   endPoint: Api.EndPoint.SEARCH,
+      //   params: {s:''}
+      // };
+      // // console.log('getData:', getData);
+      // const response = await Api.get(getData);
+      // // console.log('response on dashboard',response);
+      // if(response?.data?.meals?.length){
+      //   // setMealData(response.data.meals);
+      // }
     }
 
     const getFilterData:FC =async()=>{
-      const getData: GetData = {
-        endPoint: Api.EndPoint.FILTER,
-        params: {
-          a:selectedArea,
-          c:selectedCategory,
-          i:selectedIngredient
-        }
-      };
+      // const getData: GetData = {
+      //   endPoint: Api.EndPoint.FILTER,
+      //   params: {
+      //     a:selectedArea, //strArea
+      //     c:selectedCategory, // strCategory
+      //     i:selectedIngredient //
+      //   }
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getData);
-      // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setMealData(response.data.meals);
+      const response = await firestore().collection("search").where("strCategory","==",selectedCategory).get();
+      // const response = await Api.get(getData);
+      // console.log('response on filter',response);
+      if(response?._docs){
+        setMealData(response._docs);
       }
     }
 
     const getCategoryData:FC = async()=> {
-      const getCategoryList: GetData = {
-        endPoint: Api.EndPoint.ALL_LIST,
-        params: {c:'list'}
-      };
+      // const getCategoryList: GetData = {
+      //   endPoint: Api.EndPoint.ALL_LIST,
+      //   params: {c:'list'}
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getCategoryList);
-      // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setCategoryList(response.data.meals);
+      // const response = await Api.get(getCategoryList);
+      const response = await firestore().collection('categories').get();
+      // console.log('response on categories',response);
+      if(response?._docs){
+        setCategoryList(response._docs);
       }
     }
 
     const getAreaData:FC =async()=>{
-      const getAreaList: GetData = {
-        endPoint: Api.EndPoint.ALL_LIST,
-        params: {a:'list'}
-      };
+      // const getAreaList: GetData = {
+      //   endPoint: Api.EndPoint.ALL_LIST,
+      //   params: {a:'list'}
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getAreaList);
+      // const response = await Api.get(getAreaList);
+      const response = await firestore().collection('areas').get();
+      // console.log('response on areas',response);
       // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setAreaList(response.data.meals);
+      if(response?._docs){
+        setAreaList(response._docs);
       }
     }
 
     const getIngredientsData:FC =async()=>{
-      const getIngredientsList: GetData = {
-        endPoint: Api.EndPoint.ALL_LIST,
-        params: {i:'list'}
-      };
+      // const getIngredientsList: GetData = {
+      //   endPoint: Api.EndPoint.ALL_LIST,
+      //   params: {i:'list'}
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getIngredientsList);
+      // const response = await Api.get(getIngredientsList);
+      const response = await firestore().collection('ingredients').get();
+      // console.log('response on ingredients',response);
       // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setIngredientsList(response.data.meals);
+      if(response?._docs){
+        setIngredientsList(response._docs);
       }
     }
 
     return (
         <View flex={1} justifyContent={'center'} alignItems={'center'}>
           <Header {...{ scrollY }} onFilterPress={()=>setModalVisible(true)} />
+          {loader?
+            <Spinner flex={1} accessibilityLabel="Loading areas" />
+            :
             <FlatList 
                 contentContainerStyle={{
                     paddingHorizontal: 2,
@@ -227,10 +248,12 @@ export const List: FC = memo(() => {
                 renderItem={({ item, index }) => (
                   <FoodItemCard
                     onAddPress={()=> {
-                      dispatch(setCartData(item))
+                      dispatch(setCartData(item?._data||item))
                     }}
-                    item={item}
+                    onRemovePress={()=>{}}
+                    item={item?._data||item}
                     index={index}
+                    isOrderHistory={false}
                   />
                 )}
                 keyExtractor={(item, index) => index.toString()}
@@ -238,106 +261,111 @@ export const List: FC = memo(() => {
                 ListEmptyComponent={()=>{
                   return (
                       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                          <Text
-                              style={{paddingVertical: 20, color: '#000', fontSize: 15}}>
-                                  No Foods Yet
-                          </Text>
+                        <Text
+                          style={{paddingVertical: 20, color: '#000', fontSize: 15}}>
+                          No Foods Yet
+                        </Text>
                       </View>
                   )
                 }}
             />
-            <Modal 
-              isOpen={modalVisible} 
-              onClose={() => setModalVisible(false)}
-              initialFocusRef={initialRef}
-              finalFocusRef={finalRef}
-            >
-              <Modal.Content>
-                <Modal.CloseButton />
-                <Modal.Header>Filter</Modal.Header>
-                <Modal.Body>
-                  <Box w="3/4" maxW="300">
-                    <Select
-                      selectedValue={selectedCategory}
-                      minWidth="200"
-                      accessibilityLabel="Choose Category"
-                      placeholder="Choose Category"
-                      _selectedItem={{
-                        bg: "teal.600",
-                        endIcon: <CheckIcon size="5" />
-                      }}
-                      mt={1}
-                      onValueChange={itemValue => setSelectedCategory(itemValue)}
-                    >
-                      {categoryList.length?
-                        categoryList.map((item,index)=> <Select.Item key={index} label={item.strCategory} value={item.strCategory} />)
-                        :
-                        <Spinner accessibilityLabel="Loading categories" />
-                      }
-                    </Select>
-                  </Box>
-                  <Box w="3/4" maxW="300">
-                    <Select
-                      selectedValue={selectedArea}
-                      minWidth="200"
-                      accessibilityLabel="Choose Area"
-                      placeholder="Choose Area"
-                      _selectedItem={{
-                        bg: "teal.600",
-                        endIcon: <CheckIcon size="5" />
-                      }}
-                      mt={1}
-                      onValueChange={itemValue => setSelectedArea(itemValue)}
-                    >
-                      {areaList.length?
-                        areaList.map((item,index)=> <Select.Item key={index} label={item.strArea} value={item.strArea} />)
-                        :
-                        <Spinner accessibilityLabel="Loading areas" />
-                      }
-                    </Select>
-                  </Box>
-                  <Box w="3/4" maxW="300">
-                    <Select
-                      selectedValue={selectedIngredient}
-                      minWidth="200"
-                      accessibilityLabel="Choose Ingredient"
-                      placeholder="Choose Ingredient"
-                      _selectedItem={{
-                        bg: "teal.600",
-                        endIcon: <CheckIcon size="5" />
-                      }}
-                      mt={1}
-                      onValueChange={itemValue => setSelectedIngredient(itemValue)}
-                    >
-                      {ingredientsList.length?
-                        ingredientsList.map((item,index)=> <Select.Item key={index} label={item.strIngredient} value={item.strIngredient} />)
-                        :
-                        <Spinner accessibilityLabel="Loading ingredients" />
-                      }
-                    </Select>
-                  </Box>
-                </Modal.Body>
-                <Modal.Footer>
-                  <Button.Group space={2}>
-                    <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-                        setSelectedCategory('');
-                        setSelectedArea('');
-                        setSelectedIngredient('');
-                        setModalVisible(false);
-                        getDashboardData();
-                      }}>
-                      Reset
-                    </Button>
-                    <Button onPress={() => {
-                        setModalVisible(false);
-                        getFilterData();
-                      }}>
-                      Apply
-                    </Button>
-                  </Button.Group>
-                </Modal.Footer>
-              </Modal.Content>
-            </Modal>
+          }
+          <Modal 
+            isOpen={modalVisible} 
+            onClose={() => setModalVisible(false)}
+            initialFocusRef={initialRef}
+            finalFocusRef={finalRef}
+          >
+            <Modal.Content>
+              <Modal.CloseButton />
+              <Modal.Header>Filter</Modal.Header>
+              <Modal.Body>
+                <Box w="3/4" maxW="300">
+                  <Text>Category</Text>
+                  <Select
+                    selectedValue={selectedCategory}
+                    minWidth="200"
+                    accessibilityLabel="Choose Category"
+                    placeholder="Choose Category"
+                    _selectedItem={{
+                      bg: "teal.600",
+                      endIcon: <CheckIcon size="5" />
+                    }}
+                    mt={1}
+                    onValueChange={itemValue => setSelectedCategory(itemValue)}
+                  >
+                    {categoryList.length?
+                      categoryList.map((item,index)=> <Select.Item key={index} label={item._data.strCategory} value={item._data.strCategory} />)
+                      :
+                      <Spinner accessibilityLabel="Loading categories" />
+                    }
+                  </Select>
+                </Box>
+                <Box w="3/4" maxW="300">
+                  <Text>Area</Text>
+                  <Select
+                    selectedValue={selectedArea}
+                    minWidth="200"
+                    accessibilityLabel="Choose Area"
+                    placeholder="Choose Area"
+                    _selectedItem={{
+                      bg: "teal.600",
+                      endIcon: <CheckIcon size="5" />
+                    }}
+                    mt={1}
+                    onValueChange={itemValue => setSelectedArea(itemValue)}
+                  >
+                    {areaList.length?
+                      areaList.map((item,index)=> <Select.Item key={index} label={item._data.strArea} value={item._data.strArea} />)
+                      :
+                      <Spinner accessibilityLabel="Loading areas" />
+                    }
+                  </Select>
+                </Box>
+                <Box w="3/4" maxW="300">
+                  <Text>Ingredient</Text>
+                  <Select
+                    selectedValue={selectedIngredient}
+                    minWidth="200"
+                    accessibilityLabel="Choose Ingredient"
+                    placeholder="Choose Ingredient"
+                    _selectedItem={{
+                      bg: "teal.600",
+                      endIcon: <CheckIcon size="5" />
+                    }}
+                    mt={1}
+                    onValueChange={itemValue => setSelectedIngredient(itemValue)}
+                  >
+                    {ingredientsList.length?
+                      ingredientsList.map((item,index)=> <Select.Item key={index} label={item._data.strIngredient} value={item._data.strIngredient} />)
+                      :
+                      <Spinner accessibilityLabel="Loading ingredients" />
+                    }
+                  </Select>
+                </Box>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button.Group space={2}>
+                  <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+                      setSelectedCategory('');
+                      setSelectedArea('');
+                      setSelectedIngredient('');
+                      setModalVisible(false);
+                      // getDashboardData();
+                      getDataFromDashboard();
+                    }}>
+                    Reset
+                  </Button>
+                  <Button onPress={() => {
+                      setModalVisible(false);
+                      getFilterData();
+                    }}>
+                    Apply
+                  </Button>
+                </Button.Group>
+              </Modal.Footer>
+            </Modal.Content>
+          </Modal>
         </View>
       );
 });

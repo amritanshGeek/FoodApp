@@ -19,7 +19,15 @@ export {
 export {
   default as allCartData,
   setCartData,
+  reduceCartCount,
   updateCartData,
   removefromCart,
   emptyCartData,
 } from './cartData';
+
+export {
+  default as orderData,
+  setOrderHistory,
+  removefromOrderHistory,
+  emptyOrderHistoryData
+} from './orderData';
