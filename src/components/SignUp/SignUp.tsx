@@ -15,6 +15,7 @@ import {
     Input,
     Icon,
     useToast,
+    ScrollView,
 } from 'native-base';
 import { ParentContainer } from '../Commons';
 import styles from './styles';
@@ -76,11 +77,13 @@ export const List: FC = memo(() => {
     }
     
     return(
-        <Center pt={20} flex={1} _dark={{
+        <ScrollView pt={20} flex={1} _dark={{
             bg: "coolGray.800"
         }} _light={{
             bg: "warmGray.50"
-        }}>
+        }}
+            contentContainerStyle={{justifyContent:'center',alignItems:'center'}}
+        >
             <View width={'100%'} justifyContent={'flex-start'} alignItems={'flex-start'} >
                 <TouchableOpacity onPress={()=>NavigationService.goBack()}>
                     <Icon ml={4} as={AntDesign} size={10} name="arrowleft" color="coolGray.800" _light={{color: 'black'}} _dark={{color: "warmGray.50"}} />
@@ -163,7 +166,7 @@ export const List: FC = memo(() => {
                     <Text bold color={'orange.400'} >Sign in</Text>
                 </TouchableOpacity>
             </Box>
-        </Center>
+        </ScrollView>
     )
   });
     

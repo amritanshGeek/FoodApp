@@ -84,8 +84,8 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number>,onFilterPress: 
             onPress={() => {
               // NavigationService.dispatch(DrawerActions.openDrawer());
             }}
+            text={'Location'}
           />
-          <Text mt={3} >Location</Text>
           <View
             style={{
               flex: 1,
@@ -97,7 +97,7 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number>,onFilterPress: 
           </View>
           <TouchableOpacity
             onPress={onFilterPress}
-            style={{alignItems:'center',justifyContent:'center',padding:4}}
+            style={{flex:1,alignItems:'flex-end',justifyContent:'center',padding:4}}
           >
             <MaterialCommunityIcons name={'filter'} color={'#000'} size={20} />
           </TouchableOpacity>

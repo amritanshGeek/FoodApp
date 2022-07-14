@@ -80,7 +80,6 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
             flex: 1,
             alignItems: 'center',
             justifyContent: 'center',
-            paddingRight: header,
           }}>
           <Text fontSize={20} bold>Search</Text>
         </View>

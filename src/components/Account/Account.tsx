@@ -103,7 +103,6 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
               flex: 1,
               alignItems: 'center',
               justifyContent: 'center',
-              // paddingRight: header,
             }}>
             <Text fontSize={20} bold>Profile</Text>
           </View>
@@ -111,6 +110,7 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
             icon="logout"
             text="Logout"
             onPress={onLogoutPressed}
+            position={'absolute'}
           />
         </Animated.View>
       )
@@ -122,33 +122,33 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
 export const List: FC = memo(() => {
     const {user} = useContext(AuthContext);
     return(
-        <View flex={1} alignItems={'center'}>
-            <Image 
-                source={{
-                    uri: 'https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture-986x1024.jpg'
-                }}
-                alt="Aang flying and surrounded by clouds"
-                height="200"
-                width="200"
-                rounded="full"
-            />
-            <VStack mt={20}>
-              <HStack>
-                <Text bold fontSize={'lg'}>{'Email: '}</Text>
-                <Text fontSize={'lg'}>{user?._user.email}</Text>
-              </HStack>
-              <HStack>
-                <Text bold fontSize={'lg'}>{'Creation Time: '}</Text>
-                <Text fontSize={'lg'}>{moment(user?._user.metadata.creationTime).format('llll')}</Text>
-              </HStack>
-              <HStack>
-                <Text bold fontSize={'lg'}>{'Last Sign In Time: '}</Text>
-                <Text fontSize={'lg'}>{moment(user?._user.metadata.lastSignInTime).format('llll')}</Text>
-              </HStack>
-            </VStack>
-            <Button width={'full'} height={60} mt={20} onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.OrderHistory)} >
-              <Text bold color={'white'}>Check Order History</Text>
-            </Button>
-        </View>
+      <View flex={1} alignItems={'center'}>
+        <Image 
+          source={{
+              uri: 'https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture-986x1024.jpg'
+          }}
+          alt="Aang flying and surrounded by clouds"
+          height="200"
+          width="200"
+          rounded="full"
+        />
+        <VStack mt={20}>
+          <HStack>
+            <Text bold fontSize={'lg'}>{'Email: '}</Text>
+            <Text fontSize={'lg'}>{user?._user.email}</Text>
+          </HStack>
+          <HStack>
+            <Text bold fontSize={'lg'}>{'Creation Time: '}</Text>
+            <Text fontSize={'lg'}>{moment(user?._user.metadata.creationTime).format('llll')}</Text>
+          </HStack>
+          <HStack>
+            <Text bold fontSize={'lg'}>{'Last Sign In Time: '}</Text>
+            <Text fontSize={'lg'}>{moment(user?._user.metadata.lastSignInTime).format('llll')}</Text>
+          </HStack>
+        </VStack>
+        <Button width={'full'} height={60} mt={20} onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.OrderHistory)} >
+          <Text bold color={'white'}>Check Order History</Text>
+        </Button>
+      </View>
     )
 });
