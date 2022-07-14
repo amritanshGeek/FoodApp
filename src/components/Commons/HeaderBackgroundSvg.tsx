@@ -1,4 +1,3 @@
-// import { widthPercentageToDP } from '@slick-ui/core';
 import { reSize, Sizes, useHeaderHeight } from '../../utils';
 import React, { FC, useContext } from 'react';
 import { StyleSheet, useWindowDimensions, View } from 'react-native';

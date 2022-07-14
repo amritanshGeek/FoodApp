@@ -13,6 +13,7 @@ import {
   HStack,
   Modal,
   Spinner,
+  VStack,
 } from 'native-base';
 import { FoodItemCard, HeaderLeft, ParentContainer } from '../Commons';
 import styles from './styles';
@@ -125,7 +126,10 @@ export const List: FC = memo(() => {
         keyboardDismissMode='on-drag'
         renderItem={({ item, index }) => (
           <View bg={'muted.50'} shadow={5} flex={1} width={Dimensions.get('window').width-50} flexDirection={'row'} justifyContent={'space-around'} alignItems={'center'} py={10} >
-            <Text>{item.orderName}</Text>
+            <VStack>
+              <Text>{item.orderName}</Text>
+              <Text color={'green.700'} textAlign={'right'} mr={5} >{`Total Price: Rs${item.totalPrice}`}</Text>
+            </VStack>
             <HStack>
               <Button bg={'muted.50'} onPress={()=>{
                 setOrderDataList(item.orderData);

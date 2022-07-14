@@ -9,19 +9,18 @@ import {
   HStack,
   IconButton,
   CloseIcon,
+  Image,
+  Button,
 } from 'native-base';
 import {FoodItemCard, HeaderLeft, ParentContainer, SearchBar} from '../Commons';
 import styles from './styles';
 import { FoodItem } from '../../types';
 import { Colors, NavigationService, Sizes, useHeaderHeight } from '../../utils';
 import Animated, {
-    Extrapolate,
-    // Extrapolation,
-    interpolate,
-    // interpolateNode,
-    useAnimatedStyle,
-    // useSharedValue,
-   } from 'react-native-reanimated';
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { Dimensions, StyleProp, ViewStyle, Alert as RNAlert } from 'react-native';
 import { useSelector } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -123,25 +122,32 @@ const AlertTag:FC = memo(() => {
 
 const OrderPlace:FC = memo(() => {
   const allData = useSelector(state => state.allCartData.data);
+  let totalPrice = 0;
+  allData.forEach(item=>{
+    totalPrice= totalPrice + (item.price*item.cartCount);
+  })
   return(
-    <TouchableOpacity 
-      onPress={()=>{
-        RNAlert.alert('Order Placed Successfully');
-        dispatch(setOrderHistory({orderData:allData, orderId: Date.now()}));
-        setTimeout(()=>dispatch(emptyCartData()),100);
+    <VStack>
+      <Text color={'green.700'} textAlign={'right'} mr={5} >{`Total Price: Rs${totalPrice}`}</Text>
+      <TouchableOpacity 
+        onPress={()=>{
+          RNAlert.alert('Order Placed Successfully');
+          dispatch(setOrderHistory({orderData:allData, orderId: Date.now(), totalPrice}));
+          setTimeout(()=>dispatch(emptyCartData()),100);
 
-        // return <AlertTag />
-      }}
-      style={{
-        justifyContent:'center',
-        alignItems:'center',
-        width:Dimensions.get('screen').width,
-        backgroundColor: Colors.THEME_COLOR,
-        height:60,
-        alignSelf:'flex-end'
-      }}>
-      <Text>Place Order</Text>
-    </TouchableOpacity>
+          // return <AlertTag />
+        }}
+        style={{
+          justifyContent:'center',
+          alignItems:'center',
+          width:Dimensions.get('screen').width,
+          backgroundColor: Colors.THEME_COLOR,
+          height:60,
+          alignSelf:'flex-end'
+        }}>
+        <Text>Place Order</Text>
+      </TouchableOpacity>
+    </VStack>
   )
 })
 
@@ -183,23 +189,29 @@ export const List: FC = memo(() => {
             onEndReachedThreshold={0.5}
             ListEmptyComponent={()=>{
               return orderData?.length?
-              <View bgColor={'green.400'} flex={1} width={'full'} height={100} justifyContent={'center'} borderRadius={'2xl'} >
+              <View flex={1} width={'full'} justifyContent={'center'} >
                 <HStack alignItems={'center'} p={5} >
-                  <Icon  as={Ionicons} name='checkmark-done-outline' color={'white'} size={10} />
+                  <Icon  as={Ionicons} name='checkmark-done-outline' color={'green.400'} size={10} />
                   <Text fontSize={16} ml={2}>
                     Thankyou for Ordering with us
                   </Text>
                 </HStack>
-                <TouchableOpacity 
-                  onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.Home)}
-                  style={{
-                    backgroundColor: Colors.THEME_COLOR,
-                    borderBottomLeftRadius:24,
-                    borderBottomRightRadius:24,
-                    alignItems:'center'
-                  }}>
-                  <Text>Press here for Continue Ordering</Text>
-                </TouchableOpacity>
+                {/* <View */}
+                <Image
+                  source={require('../../assets/food_delivery.png')}
+                  alt="Aang flying and surrounded by clouds"
+                  height="200"
+                  width="200"
+                  alignSelf={'center'}
+                />
+                <HStack justifyContent={'space-around'}>
+                  <Text alignSelf={'center'}>Continue</Text>
+                  <Button bgColor={'orange.400'} borderRadius={'full'}
+                    onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.Home)}
+                  >
+                    {'Ordering'}
+                  </Button>
+                </HStack>
               </View>
               :
               <View style={{alignItems: 'center', justifyContent: 'center'}}>

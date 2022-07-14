@@ -8,8 +8,6 @@ import React, {
 import {
     View,
     Text,
-    Box,
-    Center,
     Image,
     VStack,
     Button,
@@ -18,13 +16,10 @@ import { HeaderLeft, ParentContainer } from '../Commons';
 import styles from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Animated, {
-    Extrapolate,
-    // Extrapolation,
-    interpolate,
-    // interpolateNode,
-    useAnimatedStyle,
-    // useSharedValue,
-   } from 'react-native-reanimated';
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 import { Colors, NavigationService, useHeaderHeight } from '../../utils';
 import { Alert, StyleProp, ViewStyle } from 'react-native';
 import { AuthContext } from '../../navigators/AuthProvider';

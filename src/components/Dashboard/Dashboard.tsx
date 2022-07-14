@@ -139,7 +139,7 @@ export const List: FC = memo(() => {
 
     useEffect(() => {
       setLoader(true);
-      getDashboardData();
+      // getDashboardData();
       getCategoryData();
       getAreaData();
       getIngredientsData();
@@ -148,77 +148,83 @@ export const List: FC = memo(() => {
 
     const getDataFromDashboard = async() => {
       const search = await firestore().collection('search').get();
-      console.log('search from firestore',search);
+      // console.log('search from firestore',search);
       setMealData(search._docs);
       setLoader(false);
     }
   
     const getDashboardData:FC =async()=>{
-      const getData: GetData = {
-        endPoint: Api.EndPoint.SEARCH,
-        params: {s:''}
-      };
-      // console.log('getData:', getData);
-      const response = await Api.get(getData);
-      // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        // setMealData(response.data.meals);
-      }
+      // const getData: GetData = {
+      //   endPoint: Api.EndPoint.SEARCH,
+      //   params: {s:''}
+      // };
+      // // console.log('getData:', getData);
+      // const response = await Api.get(getData);
+      // // console.log('response on dashboard',response);
+      // if(response?.data?.meals?.length){
+      //   // setMealData(response.data.meals);
+      // }
     }
 
     const getFilterData:FC =async()=>{
-      const getData: GetData = {
-        endPoint: Api.EndPoint.FILTER,
-        params: {
-          a:selectedArea,
-          c:selectedCategory,
-          i:selectedIngredient
-        }
-      };
+      // const getData: GetData = {
+      //   endPoint: Api.EndPoint.FILTER,
+      //   params: {
+      //     a:selectedArea, //strArea
+      //     c:selectedCategory, // strCategory
+      //     i:selectedIngredient //
+      //   }
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getData);
-      // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setMealData(response.data.meals);
+      const response = await firestore().collection("search").where("strCategory","==",selectedCategory).get();
+      // const response = await Api.get(getData);
+      // console.log('response on filter',response);
+      if(response?._docs){
+        setMealData(response._docs);
       }
     }
 
     const getCategoryData:FC = async()=> {
-      const getCategoryList: GetData = {
-        endPoint: Api.EndPoint.ALL_LIST,
-        params: {c:'list'}
-      };
+      // const getCategoryList: GetData = {
+      //   endPoint: Api.EndPoint.ALL_LIST,
+      //   params: {c:'list'}
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getCategoryList);
-      // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setCategoryList(response.data.meals);
+      // const response = await Api.get(getCategoryList);
+      const response = await firestore().collection('categories').get();
+      // console.log('response on categories',response);
+      if(response?._docs){
+        setCategoryList(response._docs);
       }
     }
 
     const getAreaData:FC =async()=>{
-      const getAreaList: GetData = {
-        endPoint: Api.EndPoint.ALL_LIST,
-        params: {a:'list'}
-      };
+      // const getAreaList: GetData = {
+      //   endPoint: Api.EndPoint.ALL_LIST,
+      //   params: {a:'list'}
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getAreaList);
+      // const response = await Api.get(getAreaList);
+      const response = await firestore().collection('areas').get();
+      // console.log('response on areas',response);
       // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setAreaList(response.data.meals);
+      if(response?._docs){
+        setAreaList(response._docs);
       }
     }
 
     const getIngredientsData:FC =async()=>{
-      const getIngredientsList: GetData = {
-        endPoint: Api.EndPoint.ALL_LIST,
-        params: {i:'list'}
-      };
+      // const getIngredientsList: GetData = {
+      //   endPoint: Api.EndPoint.ALL_LIST,
+      //   params: {i:'list'}
+      // };
       // console.log('getData:', getData);
-      const response = await Api.get(getIngredientsList);
+      // const response = await Api.get(getIngredientsList);
+      const response = await firestore().collection('ingredients').get();
+      // console.log('response on ingredients',response);
       // console.log('response on dashboard',response);
-      if(response?.data?.meals?.length){
-        setIngredientsList(response.data.meals);
+      if(response?._docs){
+        setIngredientsList(response._docs);
       }
     }
 
@@ -289,7 +295,7 @@ export const List: FC = memo(() => {
                     onValueChange={itemValue => setSelectedCategory(itemValue)}
                   >
                     {categoryList.length?
-                      categoryList.map((item,index)=> <Select.Item key={index} label={item.strCategory} value={item.strCategory} />)
+                      categoryList.map((item,index)=> <Select.Item key={index} label={item._data.strCategory} value={item._data.strCategory} />)
                       :
                       <Spinner accessibilityLabel="Loading categories" />
                     }
@@ -310,7 +316,7 @@ export const List: FC = memo(() => {
                     onValueChange={itemValue => setSelectedArea(itemValue)}
                   >
                     {areaList.length?
-                      areaList.map((item,index)=> <Select.Item key={index} label={item.strArea} value={item.strArea} />)
+                      areaList.map((item,index)=> <Select.Item key={index} label={item._data.strArea} value={item._data.strArea} />)
                       :
                       <Spinner accessibilityLabel="Loading areas" />
                     }
@@ -331,7 +337,7 @@ export const List: FC = memo(() => {
                     onValueChange={itemValue => setSelectedIngredient(itemValue)}
                   >
                     {ingredientsList.length?
-                      ingredientsList.map((item,index)=> <Select.Item key={index} label={item.strIngredient} value={item.strIngredient} />)
+                      ingredientsList.map((item,index)=> <Select.Item key={index} label={item._data.strIngredient} value={item._data.strIngredient} />)
                       :
                       <Spinner accessibilityLabel="Loading ingredients" />
                     }
@@ -345,7 +351,7 @@ export const List: FC = memo(() => {
                       setSelectedArea('');
                       setSelectedIngredient('');
                       setModalVisible(false);
-                      getDashboardData();
+                      // getDashboardData();
                       getDataFromDashboard();
                     }}>
                     Reset

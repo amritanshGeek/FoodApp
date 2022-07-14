@@ -1,4 +1,4 @@
-import { Box, Button, HStack, Image, Pressable, Text, View, VStack } from 'native-base';
+import { Box, Button, HStack, Image, Text, View, VStack } from 'native-base';
 import React, {FC, memo} from 'react';
 import { Linking } from 'react-native';
 import { FoodItem } from "../../types";
@@ -42,37 +42,47 @@ const FoodItemCard: FC<FoodComponentProps> = ({item,index,onAddPress,isOrderHist
                             isOrderHistory?
                             <Text>{item.cartCount}</Text>
                             :
-                            <View flexDirection={'row'} justifyContent={'space-between'} style={{borderRadius:20,minWidth:80}} bgColor={'muted.50'} alignItems={'center'} rounded="xs" alignSelf="flex-start" shadow={2}>
-                                <Button bgColor={'muted.50'} onPress={onRemovePress} >
-                                    <Text color={'black'}>{'-'}</Text>
-                                </Button>
-                                <Text textTransform="uppercase" fontSize="sm" color="black">
-                                    {item?.cartCount?item.cartCount:'Add'}
-                                </Text>
-                                <Button bgColor={'muted.50'} onPress={onAddPress} >
-                                    <Text color={'black'}>{'+'}</Text>
-                                </Button>
-                            </View>
+                            <VStack>
+                                <View flexDirection={'row'} justifyContent={'space-between'} style={{borderRadius:20,minWidth:80}} bgColor={'muted.50'} alignItems={'center'} rounded="xs" alignSelf="flex-start" shadow={2}>
+                                    <Button bgColor={'muted.50'} onPress={onRemovePress} >
+                                        <Text color={'black'}>{'-'}</Text>
+                                    </Button>
+                                    <Text textTransform="uppercase" fontSize="sm" color="black">
+                                        {item?.cartCount?item.cartCount:'Add'}
+                                    </Text>
+                                    <Button bgColor={'muted.50'} onPress={onAddPress} >
+                                        <Text color={'black'}>{'+'}</Text>
+                                    </Button>
+                                </View>
+                                <Text color={'green.700'} textAlign={'center'}>{`Rs ${item?.price*item.cartCount}`}</Text>
+                            </VStack>
                             :
-                            <Button style={{borderRadius:20,minWidth:100}} bgColor={'muted.50'} alignItems={'center'} onPress={onAddPress} rounded="xs" alignSelf="flex-start" p="1" shadow={2}>
-                                <Text textTransform="uppercase" fontSize="sm" color="black">
-                                    {item?.cartCount?item.cartCount:'Add'}
-                                </Text>
-                            </Button>
+                            <VStack>
+                                <Button style={{borderRadius:20,minWidth:100}} bgColor={'muted.50'} alignItems={'center'} onPress={onAddPress} rounded="xs" alignSelf="flex-start" p="1" shadow={2}>
+                                    <Text textTransform="uppercase" fontSize="sm" color="black">
+                                        {item?.cartCount?item.cartCount:'Add'}
+                                    </Text>
+                                </Button>
+                                <Text color={'green.700'} textAlign={'center'}>{`Rs ${item?.price}`}</Text>
+                            </VStack>
                         }
                     </HStack>
-                    <HStack flex={1} justifyContent={'space-around'} alignItems={'center'}>
-                        <Button style={{borderRadius:20}} bgColor={'muted.50'} onPress={()=> item?.strYoutube?Linking.openURL(item.strYoutube):null} rounded="xs" alignSelf="flex-start" p="2" shadow={2}>
-                            <Text textTransform="uppercase" fontSize="sm" color="black">
-                                Reference
-                            </Text>
-                        </Button>
-                        <Button style={{borderRadius:20}} bgColor={'muted.50'} onPress={()=> item?.strSource?Linking.openURL(item.strSource):null} rounded="xs" alignSelf="flex-start" p="2" ml='3'  shadow={2}>
-                            <Text textTransform="uppercase" fontSize="sm" color="black">
-                                Source
-                            </Text>
-                        </Button>
-                    </HStack>
+                    {isOrderHistory?
+                        <Text color={'green.700'} textAlign={'center'}>{`Rs ${item?.price*item.cartCount}`}</Text>
+                        :
+                        <HStack flex={1} justifyContent={'space-around'} alignItems={'center'}>
+                            <Button style={{borderRadius:20}} bgColor={'muted.50'} onPress={()=> item?.strYoutube?Linking.openURL(item.strYoutube):null} rounded="xs" alignSelf="flex-start" p="2" shadow={2}>
+                                <Text textTransform="uppercase" fontSize="sm" color="black">
+                                    Reference
+                                </Text>
+                            </Button>
+                            <Button style={{borderRadius:20}} bgColor={'muted.50'} onPress={()=> item?.strSource?Linking.openURL(item.strSource):null} rounded="xs" alignSelf="flex-start" p="2" ml='3'  shadow={2}>
+                                <Text textTransform="uppercase" fontSize="sm" color="black">
+                                    Source
+                                </Text>
+                            </Button>
+                        </HStack>
+                    }
                 </VStack>
             </HStack>
       </Box>
