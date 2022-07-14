@@ -11,6 +11,7 @@ import {
     Image,
     VStack,
     Button,
+    HStack,
 } from 'native-base';
 import { HeaderLeft, ParentContainer } from '../Commons';
 import styles from './styles';
@@ -24,6 +25,7 @@ import { Colors, NavigationService, useHeaderHeight } from '../../utils';
 import { Alert, StyleProp, ViewStyle } from 'react-native';
 import { AuthContext } from '../../navigators/AuthProvider';
 import DrawerButton from '../Drawer/DrawerButton';
+import moment from 'moment';
 AntDesign.loadFont();
 
 export const Container: FC = ({ children }) => {
@@ -131,12 +133,21 @@ export const List: FC = memo(() => {
                 rounded="full"
             />
             <VStack mt={20}>
-                <Text bold fontSize={'lg'}>{`Email: ${user?._user.email}`}</Text>
-                <Text bold fontSize={'lg'}>{`Creation Time: ${user?._user.metadata.creationTime}`}</Text>
-                <Text bold fontSize={'lg'}>{`Last Sign In Time: ${user?._user.metadata.lastSignInTime}`}</Text>
+              <HStack>
+                <Text bold fontSize={'lg'}>{'Email: '}</Text>
+                <Text fontSize={'lg'}>{user?._user.email}</Text>
+              </HStack>
+              <HStack>
+                <Text bold fontSize={'lg'}>{'Creation Time: '}</Text>
+                <Text fontSize={'lg'}>{moment(user?._user.metadata.creationTime).format('llll')}</Text>
+              </HStack>
+              <HStack>
+                <Text bold fontSize={'lg'}>{'Last Sign In Time: '}</Text>
+                <Text fontSize={'lg'}>{moment(user?._user.metadata.lastSignInTime).format('llll')}</Text>
+              </HStack>
             </VStack>
             <Button width={'full'} height={60} mt={20} onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.OrderHistory)} >
-              Check Order History
+              <Text bold color={'white'}>Check Order History</Text>
             </Button>
         </View>
     )
