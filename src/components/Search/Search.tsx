@@ -1,22 +1,18 @@
 import React, {FC, memo, useEffect, useMemo, useState} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-} from 'native-base';
+import {View, Text, FlatList} from 'native-base';
 import {HeaderLeft, ParentContainer, SearchBar, FoodItemCard} from '../Commons';
 import styles from './styles';
-import { FoodItem, GetData } from '../../types';
-import { Api } from '../../Features/config';
-import { Colors, NavigationService, Sizes, useHeaderHeight } from '../../utils';
+import {FoodItem, GetData} from '../../types';
+import {Api} from '../../Features/config';
+import {Colors, NavigationService, Sizes, useHeaderHeight} from '../../utils';
 import Animated, {
-    Extrapolate,
-    interpolate,
-    useAnimatedStyle,
-   } from 'react-native-reanimated';
-import { Linking, StyleProp, ViewStyle } from 'react-native';
-import { dispatch } from '../../store';
-import { setCartData } from '../../Features';
+  Extrapolate,
+  interpolate,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
+import {Linking, StyleProp, ViewStyle} from 'react-native';
+import {dispatch} from '../../store';
+import {setCartData} from '../../Features';
 import firestore from '@react-native-firebase/firestore';
 
 /**
@@ -24,17 +20,14 @@ import firestore from '@react-native-firebase/firestore';
  */
 
 export const Container: FC = ({children}) => {
-    return (
-        <ParentContainer style={[styles.container]}>{children}</ParentContainer>
-    );
+  return (
+    <ParentContainer style={[styles.container]}>{children}</ParentContainer>
+  );
 };
 
-
-
-  
-export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
-  ({ scrollY }) => {
-    const { headerHeight, header, statusBarHeight } = useHeaderHeight();
+export const Header: FC<{scrollY: Animated.SharedValue<number>}> = memo(
+  ({scrollY}) => {
+    const {headerHeight, header, statusBarHeight} = useHeaderHeight();
 
     const headerStyle = useMemo<StyleProp<ViewStyle>>(
       () => ({
@@ -81,23 +74,25 @@ export  const Header: FC<{ scrollY: Animated.SharedValue<number> }> = memo(
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          <Text fontSize={20} bold>Search</Text>
+          <Text fontSize={20} bold>
+            Search
+          </Text>
         </View>
       </Animated.View>
-    )
-  }
-)
+    );
+  },
+);
 
 export const List: FC = memo(() => {
-  const [loader,setLoader]=useState<boolean | undefined>(true);
-  const [mealData,setMealData]=useState<FoodItem[] | undefined>([]);
+  const [loader, setLoader] = useState<boolean | undefined>(true);
+  const [mealData, setMealData] = useState<FoodItem[] | undefined>([]);
   const [searchText, setSearchText] = useState<string | undefined>('');
 
   useEffect(() => {
     getDashboardData();
   }, [searchText]);
-  
-  const getDashboardData:FC =async()=>{
+
+  const getDashboardData: FC = async () => {
     setLoader(true);
     // const getData: GetData = {
     //     endPoint: Api.EndPoint.SEARCH,
@@ -106,40 +101,44 @@ export const List: FC = memo(() => {
     // console.log('getData:', getData);
     // const response = await Api.get(getData);
     // const res =  (response.data as any).meals as FoodItem[];
-    const response = await firestore().collection('search').where('strMeal', '>=', searchText).where('strMeal', '<', searchText+'z').get();
+    const response = await firestore()
+      .collection('search')
+      .where('strMeal', '>=', searchText)
+      .where('strMeal', '<', searchText + 'z')
+      .get();
     // console.log('response on search',response);
-    if(response?._docs){
+    if (response?._docs) {
       setMealData(response._docs);
     }
     setLoader(false);
-  }
+  };
 
   return (
     <View flex={1} justifyContent={'center'} alignItems={'center'}>
       <SearchBar
         style={{
-            marginHorizontal: Sizes.HORIZONTAL_PADDING,
+          marginHorizontal: Sizes.HORIZONTAL_PADDING,
         }}
         value={searchText}
         onChangeText={setSearchText}
       />
-      <FlatList 
+      <FlatList
         contentContainerStyle={{
-            paddingHorizontal: 2,
-            paddingVertical: 16,
+          paddingHorizontal: 2,
+          paddingVertical: 16,
         }}
-        ItemSeparatorComponent={() => <View style={{ height: 10 }} />}
+        ItemSeparatorComponent={() => <View style={{height: 10}} />}
         key={'tag_tag_key'}
         style={{}}
         data={mealData}
-        keyboardShouldPersistTaps='always'
-        keyboardDismissMode='on-drag'
-        renderItem={({ item, index }) => (
+        keyboardShouldPersistTaps="always"
+        keyboardDismissMode="on-drag"
+        renderItem={({item, index}) => (
           <FoodItemCard
-            onAddPress={()=> {
-              dispatch(setCartData(item._data))
+            onAddPress={() => {
+              dispatch(setCartData(item._data));
             }}
-            onRemovePress={()=>{}}
+            onRemovePress={() => {}}
             item={item._data}
             index={index}
             isOrderHistory={false}
@@ -147,20 +146,19 @@ export const List: FC = memo(() => {
         )}
         keyExtractor={(item, index) => index.toString()}
         onEndReachedThreshold={0.5}
-        ListEmptyComponent={()=>{
+        ListEmptyComponent={() => {
           return (
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Text
                 style={{
                   paddingVertical: 20,
                   color: '#000',
-                  fontSize: 15
-                }}
-              >
+                  fontSize: 15,
+                }}>
                 No Foods Yet
               </Text>
             </View>
-          )
+          );
         }}
       />
     </View>

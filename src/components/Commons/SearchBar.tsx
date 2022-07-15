@@ -1,8 +1,10 @@
-import { Colors, FontSize, IconSize, reSize, Sizes } from '../../utils';
-import React, { FC, memo } from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import {Colors, FontSize, IconSize, reSize, Sizes} from '../../utils';
+import React, {FC, memo} from 'react';
+import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
+import {TextInput} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import {Icon} from 'native-base';
 
 /**
  * SearchBarProps
@@ -17,7 +19,7 @@ type SearchBarProps = {
 /**
  * SearchBar
  */
-const SearchBar: FC<SearchBarProps> = ({ style, ...props }) => {
+const SearchBar: FC<SearchBarProps> = ({style, ...props}) => {
   return (
     <View
       style={[
@@ -33,8 +35,17 @@ const SearchBar: FC<SearchBarProps> = ({ style, ...props }) => {
         {...props}
         placeholder={'Search Meal'}
         placeholderTextColor={Colors.LIGHT_TEXT}
-        style={[styles.input, { color: Colors.DARK_TEXT }]}
+        style={[styles.input, {color: Colors.DARK_TEXT}]}
       />
+      {props.value?.length ? (
+        <Icon
+          onPress={() => props.onChangeText('')}
+          as={Entypo}
+          name="circle-with-cross"
+          color={Colors.DARK_TEXT}
+          size={8}
+        />
+      ) : null}
     </View>
   );
 };

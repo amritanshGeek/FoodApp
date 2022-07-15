@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { UsersDataState } from '../types';
+import {createSlice} from '@reduxjs/toolkit';
+import {UsersDataState} from '../types';
 
 const initialState: UsersDataState = {};
 
@@ -8,9 +8,9 @@ const userSlice = createSlice({
   name: 'data',
   reducers: {
     setUsersDataDetails: (state, action) => {
-      if(state.data?.length){
-        state.data = [...state.data,action.payload[0]];
-      }else{
+      if (state.data?.length) {
+        state.data = [...state.data, action.payload[0]];
+      } else {
         state.data = [action.payload[0]];
       }
     },
@@ -20,6 +20,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUsersDataDetails, removeUsersDataDetails } = userSlice.actions;
+export const {setUsersDataDetails, removeUsersDataDetails} = userSlice.actions;
 
 export default userSlice.reducer;

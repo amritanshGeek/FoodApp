@@ -1,10 +1,10 @@
-import { ReducerState } from "./reducer";
+import {ReducerState} from './reducer';
 
 /**
  * User
  * My Profile/user details
  */
- export interface User {
+export interface User {
   _id: string;
   email: string;
   name: string;
@@ -123,22 +123,21 @@ export type orderDataItem = {
   orderId: string;
   orderName: string;
   totalPrice: number;
-}
+};
 
 export type orderDataType = {
   data?: orderDataItem[];
-  orderCount?: number;
-}
-
+  orderCount?: number|0;
+};
 
 export type categoryItem = {
-  strCategory: string,
-}
+  strCategory: string;
+};
 
 export type areaItem = {
-  strArea: string,
-}
+  strArea: string;
+};
 
 export type ingredientsItem = {
-  strIngredient: string,
-}
+  strIngredient: string;
+};

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, {FC, useMemo} from 'react';
 import {
   Platform,
   StyleProp,
@@ -8,11 +8,11 @@ import {
   ViewStyle,
   Text,
 } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { FontSize, reSize, Sizes, useHeaderHeight } from '../../utils';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {FontSize, reSize, Sizes, useHeaderHeight} from '../../utils';
 import HeaderBackground from './HeaderBackgroundSvg';
 import HeaderLeft from './HeaderLeft';
-import Svg, { Path } from 'react-native-svg';
+import Svg, {Path} from 'react-native-svg';
 
 /**
  * HeaderProps
@@ -39,9 +39,9 @@ const Header: FC<HeaderProps> = props => {
     onPressHeaderLeft,
     transparent,
   } = props;
-  const { width, height } = useWindowDimensions();
+  const {width, height} = useWindowDimensions();
   // hooks
-  const { header, headerHeight, statusBarHeight } = useHeaderHeight();
+  const {header, headerHeight, statusBarHeight} = useHeaderHeight();
   const route = useRoute();
   const navigation = useNavigation();
 
@@ -93,7 +93,7 @@ const Header: FC<HeaderProps> = props => {
         style={[
           styles.title,
           titleStyles,
-          { paddingBottom: Sizes.HEADER_OFFSET },
+          {paddingBottom: Sizes.HEADER_OFFSET},
         ]}>
         {headerTitle ? (
           headerTitle()

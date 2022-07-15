@@ -1,6 +1,6 @@
-import React, { FC, memo } from 'react';
+import React, {FC, memo} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { reSize } from '../../utils';
+import {reSize} from '../../utils';
 Ionicons.loadFont();
 
 /**

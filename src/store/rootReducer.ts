@@ -1,4 +1,4 @@
-import { AnyAction, combineReducers } from '@reduxjs/toolkit';
+import {AnyAction, combineReducers} from '@reduxjs/toolkit';
 
 import {
   accessToken,
@@ -8,7 +8,7 @@ import {
   orderData,
 } from '../Features';
 
-import { enableMapSet } from 'immer';
+import {enableMapSet} from 'immer';
 
 enableMapSet();
 
@@ -18,7 +18,7 @@ const combinedReducer = combineReducers({
   userDetails,
   allUserDetails,
   allCartData,
-  orderData
+  orderData,
 });
 
 /**

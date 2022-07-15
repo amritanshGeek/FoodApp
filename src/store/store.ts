@@ -6,15 +6,21 @@ import {
   ThunkAction,
   AsyncThunkAction,
 } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
-import rootReducer, { RootState } from './rootReducer';
+import {useDispatch} from 'react-redux';
+import {PersistConfig, persistReducer, persistStore} from 'redux-persist';
+import rootReducer, {RootState} from './rootReducer';
 
 const persistConfig: PersistConfig<any> = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  whitelist: ['accessToken', 'userDetails','allUserDetails','allCartData','orderData'],
+  whitelist: [
+    'accessToken',
+    'userDetails',
+    'allUserDetails',
+    'allCartData',
+    'orderData',
+  ],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

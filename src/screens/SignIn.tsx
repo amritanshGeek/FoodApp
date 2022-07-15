@@ -1,6 +1,6 @@
-import { SignInComponents } from '../components';
-import React, { FC, memo } from 'react';
-const { Container, List } = SignInComponents;
+import {SignInComponents} from '../components';
+import React, {FC, memo} from 'react';
+const {Container, List} = SignInComponents;
 
 /**
  * SignIn
