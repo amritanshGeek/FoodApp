@@ -1,17 +1,17 @@
-import { ProfileComponents } from '../components';
-import React, { FC, memo } from 'react';
-import { useScrollValue } from '../utils';
-const { Container, Header, List } = ProfileComponents;
+import {ProfileComponents} from '../components';
+import React, {FC, memo} from 'react';
+import {useScrollValue} from '../utils';
+const {Container, Header, List} = ProfileComponents;
 
 /**
  * Account
  */
 const Account: FC = () => {
-  const { scrollClamp: scrollY } = useScrollValue();
+  const {scrollClamp: scrollY} = useScrollValue();
 
   return (
     <Container>
-      <Header {...{ scrollY }} />
+      <Header {...{scrollY}} />
       <List />
     </Container>
   );

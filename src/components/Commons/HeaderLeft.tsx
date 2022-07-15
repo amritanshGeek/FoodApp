@@ -1,13 +1,13 @@
-import React, { FC, memo, useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { reSize, useHeaderHeight } from '../../utils';
+import React, {FC, memo, useMemo} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {reSize, useHeaderHeight} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   useNavigation,
   useNavigationState,
   useRoute,
 } from '@react-navigation/native';
-import { Pressable, Text } from 'native-base';
+import {Pressable, Text} from 'native-base';
 Ionicons.loadFont();
 
 /**
@@ -26,18 +26,26 @@ type HeaderLeftProps = {
  */
 
 const HeaderLeft: FC<HeaderLeftProps> = props => {
-  const { isMenuIcon, icon, onPress, color = '#fff', text } = props;
-  const { header } = useHeaderHeight();
+  const {isMenuIcon, icon, onPress, color = '#fff', text} = props;
+  const {header} = useHeaderHeight();
   return (
     <Pressable
-      {...{ onPress }}
-      style={[styles.container, { height: header, width: header },text?{flex:1}:{position:'absolute',left:0,top:50,zIndex:99}]}>
+      {...{onPress}}
+      style={[
+        styles.container,
+        {height: header, width: header},
+        text ? {flex: 1} : {position: 'absolute', left: 0, top: 50, zIndex: 99},
+      ]}>
       <Ionicons
         name={isMenuIcon ? 'location' : icon || 'arrow-back'}
         size={20}
         color={color}
       />
-      {text?<Text alignSelf={'center'} mt={3} color={'black'} >{text}</Text>:null}
+      {text ? (
+        <Text alignSelf={'center'} mt={3} color={'black'}>
+          {text}
+        </Text>
+      ) : null}
     </Pressable>
   );
 };
@@ -54,7 +62,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     // flex:1,
-    flexDirection:'row',
-    marginLeft:10,
+    flexDirection: 'row',
+    marginLeft: 10,
   },
 });

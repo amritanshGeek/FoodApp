@@ -1,5 +1,5 @@
-import { Sizes } from '../../utils';
-import { StyleSheet } from 'react-native';
+import {Sizes} from '../../utils';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   container: {

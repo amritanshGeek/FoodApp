@@ -29,5 +29,5 @@ export {
   default as orderData,
   setOrderHistory,
   removefromOrderHistory,
-  emptyOrderHistoryData
+  emptyOrderHistoryData,
 } from './orderData';

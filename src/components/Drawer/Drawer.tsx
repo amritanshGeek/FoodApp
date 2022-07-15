@@ -1,15 +1,19 @@
-import React, { FC, memo, useCallback, useContext } from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
-import { DrawerContentComponentProps } from '@react-navigation/drawer';
-import { ScrollView } from 'react-native-gesture-handler';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { NavigationService, Colors, reSize } from '../../utils';
-import { DrawerActions } from '@react-navigation/native';
+import React, {FC, memo, useCallback, useContext} from 'react';
+import {View, StyleSheet, Alert} from 'react-native';
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {ScrollView} from 'react-native-gesture-handler';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {NavigationService, Colors, reSize} from '../../utils';
+import {DrawerActions} from '@react-navigation/native';
 import DrawerButton from './DrawerButton';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { dispatch } from '../../store';
-import { removeAccessToken, removeUserDetails, removeUsersDataDetails } from '../../Features';
-import { AuthContext } from '../../navigators/AuthProvider';
+import {dispatch} from '../../store';
+import {
+  removeAccessToken,
+  removeUserDetails,
+  removeUsersDataDetails,
+} from '../../Features';
+import {AuthContext} from '../../navigators/AuthProvider';
 
 /**
  * DrawerProps
@@ -20,37 +24,34 @@ type DrawerProps = DrawerContentComponentProps & {};
  * Drawer
  */
 const Drawer: FC<DrawerProps> = () => {
-  const { top, bottom } = useSafeAreaInsets();
+  const {top, bottom} = useSafeAreaInsets();
   // const { t } = useTranslation();
-    const {logout}= useContext(AuthContext);
+  const {logout} = useContext(AuthContext);
 
   const onLogoutPressed = useCallback(() => {
-    Alert.alert(  
-      'Are You Sure Want to Logout',
-      '',
-      [  
-        {  
-          text: 'Cancel',  
-          onPress: () => {},
-          style: 'cancel',  
-        },  
-        {
-          text: 'Yes', 
-          onPress: () => {
-            logout();
-            // dispatch(removeAccessToken());
-            // dispatch(removeUserDetails());
-            // // dispatch(removeUsersDataDetails());
-            // NavigationService.replace('Auth');
-            // // dispatch({ type: 'RESET' });
-            // console.log('lgout now');
-          }
-        },  
-      ]
-    );
+    Alert.alert('Are You Sure Want to Logout', '', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: () => {
+          logout();
+          // dispatch(removeAccessToken());
+          // dispatch(removeUserDetails());
+          // // dispatch(removeUsersDataDetails());
+          // NavigationService.replace('Auth');
+          // // dispatch({ type: 'RESET' });
+          // console.log('lgout now');
+        },
+      },
+    ]);
   }, []);
   return (
-    <View style={[styles.container, { backgroundColor: Colors.LIGHT_BACKGROUND }]}>
+    <View
+      style={[styles.container, {backgroundColor: Colors.LIGHT_BACKGROUND}]}>
       <ScrollView
         contentContainerStyle={{
           paddingTop: top,
@@ -99,11 +100,7 @@ const Drawer: FC<DrawerProps> = () => {
             NavigationService.dispatch(DrawerActions.closeDrawer());
           }}
         />
-        <DrawerButton
-          icon="logout"
-          text="Logout"
-          onPress={onLogoutPressed}
-        />
+        <DrawerButton icon="logout" text="Logout" onPress={onLogoutPressed} />
       </ScrollView>
     </View>
   );

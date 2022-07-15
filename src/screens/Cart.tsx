@@ -1,17 +1,17 @@
-import React, { FC, memo} from 'react';
-import { useScrollValue } from '../utils';
-import { CartComponents } from '../components';
-const { Container, Header, List } = CartComponents;
+import React, {FC, memo} from 'react';
+import {useScrollValue} from '../utils';
+import {CartComponents} from '../components';
+const {Container, Header, List} = CartComponents;
 /**
  * Cart
  */
 
 const Cart: FC = () => {
-  const { scrollClamp: scrollY } = useScrollValue();
+  const {scrollClamp: scrollY} = useScrollValue();
 
   return (
     <Container>
-      <Header {...{ scrollY }} />
+      <Header {...{scrollY}} />
       <List />
     </Container>
   );

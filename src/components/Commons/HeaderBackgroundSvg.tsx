@@ -1,6 +1,6 @@
-import { reSize, Sizes, useHeaderHeight } from '../../utils';
-import React, { FC, useContext } from 'react';
-import { StyleSheet, useWindowDimensions, View } from 'react-native';
+import {reSize, Sizes, useHeaderHeight} from '../../utils';
+import React, {FC, useContext} from 'react';
+import {StyleSheet, useWindowDimensions, View} from 'react-native';
 import Svg, {
   SvgProps,
   Path,
@@ -13,8 +13,8 @@ import Svg, {
 
 const offset = Sizes.HEADER_OFFSET;
 const HeaderBackgroundSvg: FC<SvgProps> = props => {
-  const { width } = useWindowDimensions();
-  const { headerHeight } = useHeaderHeight();
+  const {width} = useWindowDimensions();
+  const {headerHeight} = useHeaderHeight();
   return (
     <View style={StyleSheet.absoluteFill}>
       <Svg
@@ -65,9 +65,9 @@ const HeaderBackgroundSvg: FC<SvgProps> = props => {
         </Mask>
         <G mask="url(#prefix__a)" fillRule="evenodd" clipRule="evenodd">
           <Path
-            d={`M${0} ${headerHeight + offset} Q${
-              width / 2.7 / 2
-            } ${headerHeight / 2} ${width / 2.7} ${headerHeight}z`}
+            d={`M${0} ${headerHeight + offset} Q${width / 2.7 / 2} ${
+              headerHeight / 2
+            } ${width / 2.7} ${headerHeight}z`}
             fill="url(#prefix__paint1_linear)"
           />
           <Path

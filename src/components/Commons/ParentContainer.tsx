@@ -1,28 +1,22 @@
-import React, { FC, memo, ReactNode } from 'react';
-import {
-  StyleProp,
-  StyleSheet,
-  View,
-  ViewProps,
-  ViewStyle,
-} from 'react-native';
-import { Colors } from '../../utils'
+import React, {FC, memo, ReactNode} from 'react';
+import {StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+import {Colors} from '../../utils';
 
 /**
  * ParentContainerProps
  */
-export type ParentContainerProps = ViewProps & { children: ReactNode };
+export type ParentContainerProps = ViewProps & {children: ReactNode};
 
 /**
  * ParentContainer
  */
 const ParentContainer: FC<ParentContainerProps> = ({
   children,
-  style = { flex: 1 },
+  style = {flex: 1},
   ...rest
 }) => {
   return (
-    <View style={[style, { backgroundColor: Colors.LIGHT_BACKGROUND }]} {...rest}>
+    <View style={[style, {backgroundColor: Colors.LIGHT_BACKGROUND}]} {...rest}>
       {children}
     </View>
   );
@@ -42,8 +36,8 @@ export const Line = memo(() => {
   );
 });
 
-export const Card: FC<{ style?: StyleProp<ViewStyle> }> = memo(
-  ({ style, children }) => {
+export const Card: FC<{style?: StyleProp<ViewStyle>}> = memo(
+  ({style, children}) => {
     return (
       <View
         style={[

@@ -1,5 +1,5 @@
-import { Platform, useWindowDimensions } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import {Platform, useWindowDimensions} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 export const useHeaderHeight = (): {
   headerHeight: number;
@@ -7,7 +7,7 @@ export const useHeaderHeight = (): {
   statusBarHeight: number;
 } => {
   const layout = useWindowDimensions();
-  const { top: statusBarHeight } = useSafeAreaInsets();
+  const {top: statusBarHeight} = useSafeAreaInsets();
   const isLandscape = layout.width > layout.height;
 
   let headerHeight;

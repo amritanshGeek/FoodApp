@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { AccessTokenState } from '../types';
+import {createSlice} from '@reduxjs/toolkit';
+import {AccessTokenState} from '../types';
 
 const initialState: AccessTokenState = {};
 
@@ -16,6 +16,6 @@ const accessTokenSlice = createSlice({
   },
 });
 
-export const { setAccessToken, removeAccessToken } = accessTokenSlice.actions;
+export const {setAccessToken, removeAccessToken} = accessTokenSlice.actions;
 
 export default accessTokenSlice.reducer;
