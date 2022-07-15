@@ -108,9 +108,8 @@ export const Header: FC<{scrollY: Animated.SharedValue<number>}> = memo(
 
 export const List: FC = memo(() => {
   const [modalVisible, setModalVisible] = useState<boolean | undefined>(false);
-  const [orderDataList, setOrderDataList] = useState<FoodItem[] | undefined>(
-    [],
-  );
+  const [orderDataList, setOrderDataList] = useState<FoodItem[] | undefined>([]);
+  const [currentTotalPrice, setCurrentTotalPrice] = useState<number | undefined>(0);
   const orderData = useSelector(state => state.orderData);
   const {data} = orderData;
   return (
@@ -148,6 +147,7 @@ export const List: FC = memo(() => {
                 bg={'muted.50'}
                 onPress={() => {
                   setOrderDataList(item.orderData);
+                  setCurrentTotalPrice(item.totalPrice);
                   setTimeout(() => setModalVisible(true), 100);
                 }}>
                 <Icon
@@ -191,7 +191,10 @@ export const List: FC = memo(() => {
       <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)}>
         <Modal.Content>
           <Modal.CloseButton />
-          <Modal.Header>Order Details</Modal.Header>
+          <Modal.Header>
+            {'Order Details'}
+            <Text color={'green.700'}>{`Rs ${currentTotalPrice}`}</Text>
+          </Modal.Header>
           <Modal.Body>
             {orderDataList ? (
               <FlatList
