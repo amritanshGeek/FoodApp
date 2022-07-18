@@ -215,7 +215,7 @@ export const List: FC = memo(() => {
                     item={item}
                     index={index}
                     isOrderHistory={true}
-                    disabled={false}
+                    disabled={true}
                   />
                 )}
                 keyExtractor={(item, index) => index.toString()}
