@@ -5,6 +5,7 @@ export {default as SearchComponents} from './Search';
 export {default as CartComponents} from './Cart';
 export {default as ProfileComponents} from './Account';
 export {default as OrderHistoryComponents} from './OrderHistory';
+export {default as FoodDetailComponents} from './Fooddetail';
 
 export * from './Commons';
 export * from './Drawer';

@@ -209,6 +209,7 @@ export const List: FC = memo(() => {
             }}
             item={item}
             index={index}
+            disabled={true}
             isOrderHistory={false}
           />
         )}

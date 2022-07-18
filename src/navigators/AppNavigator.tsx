@@ -4,7 +4,7 @@ import {ParentContainer} from '../components';
 import {NavigationService} from '../utils';
 import {View} from 'react-native';
 import AppDrawer from './HomeDrawerNavigator';
-import {Dashboard, Cart, Search, Account, OrderHistory} from '../screens';
+import {Dashboard, Cart, Search, Account, OrderHistory, FoodDetail} from '../screens';
 
 const AppStack = createStackNavigator();
 
@@ -57,6 +57,13 @@ const AppNavigator: FC = () => {
             headerShown: false,
           }}
           component={OrderHistory}
+        />
+        <AppStack.Screen
+          name={NavigationService.ScreenNames.FoodDetail}
+          options={{
+            headerShown: false,
+          }}
+          component={FoodDetail}
         />
       </AppStack.Navigator>
     </ParentContainer>
