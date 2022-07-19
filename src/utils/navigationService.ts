@@ -78,4 +78,5 @@ export const ScreenNames = {
   Search: 'Search',
   Account: 'Account',
   OrderHistory: 'OrderHistory',
+  FoodDetail: 'FoodDetail',
 };

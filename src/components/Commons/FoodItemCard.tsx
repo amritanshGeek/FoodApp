@@ -1,4 +1,5 @@
-import {Box, Button, HStack, Image, Text, View, VStack} from 'native-base';
+import { NavigationService } from '../../utils';
+import {Box, Button, HStack, Image, Pressable, Text, View, VStack} from 'native-base';
 import React, {FC, memo} from 'react';
 import {Linking} from 'react-native';
 import {FoodItem} from '../../types';
@@ -12,6 +13,7 @@ type FoodComponentProps = {
   onAddPress: () => void;
   isOrderHistory: boolean;
   onRemovePress: () => void;
+  disabled: boolean;
 };
 
 /**
@@ -24,10 +26,13 @@ const FoodItemCard: FC<FoodComponentProps> = ({
   onAddPress,
   isOrderHistory,
   onRemovePress,
+  disabled
 }) => {
   return (
-    <Box
+    <Pressable
+      onPress={()=>NavigationService.navigate(NavigationService.ScreenNames.FoodDetail,{...item})}
       key={index}
+      disabled={disabled}
       bg="white"
       py="4"
       px="3"
@@ -151,7 +156,7 @@ const FoodItemCard: FC<FoodComponentProps> = ({
           )}
         </VStack>
       </HStack>
-    </Box>
+    </Pressable>
   );
 };
 

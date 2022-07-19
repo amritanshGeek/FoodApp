@@ -1,5 +1,5 @@
 import React, {FC, memo, useMemo} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Platform} from 'react-native';
 import {reSize, useHeaderHeight} from '../../utils';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
@@ -34,7 +34,7 @@ const HeaderLeft: FC<HeaderLeftProps> = props => {
       style={[
         styles.container,
         {height: header, width: header},
-        text ? {flex: 1} : {position: 'absolute', left: 0, top: 50, zIndex: 99},
+        text ? {flex: 1} : {position: 'absolute', left: 0, top: Platform.OS==='ios'?50:0, zIndex: 99},
       ]}>
       <Ionicons
         name={isMenuIcon ? 'location' : icon || 'arrow-back'}

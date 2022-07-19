@@ -13,10 +13,6 @@ const isIpad = Platform.OS === 'ios' ? Platform.isPad : false;
  * HomeDrawerNavigator
  */
 const HomeDrawerNavigator: FC = () => {
-  const data = useSelector(state => state.userDetails.data);
-  const token = useSelector(state => state.accessToken.token);
-  const allData = useSelector(state => state.allUserDetails.data);
-
   return (
     <Navigator
       screenOptions={{
